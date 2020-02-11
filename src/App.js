@@ -16,11 +16,11 @@ export default class App extends Component {
 
           <Header />
           <Switch>
-          
-            <Route path='/Portfolio' exact component={Portfolio} />
-            <Route path='/Portfolio/:id' render={props => <Portfolio {...props} />}/> {/*  this.props.match.params.id  */}
 
-            
+            <Route path='/Portfolio' exact component={Portfolio} />
+            <Route path='/Portfolio/:id' render={props => <Portfolio {...props} />} /> {/*  this.props.match.params.id  */}
+
+
             <Route path='/HIT' component={HowItWork} />
             <Route path='/ContactUs' component={ContactUs} />
             <Route path='/Services' component={Services} />
