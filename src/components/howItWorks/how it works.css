@@ -90,10 +90,6 @@ input[type=submit]:hover {
     color: blue;
 }
 
-p {
-    color: rgb(106, 106, 107);
-}
-
 .form {
     background-color: white;
     padding: 3%;

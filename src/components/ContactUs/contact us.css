@@ -60,7 +60,6 @@ textarea {
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
-    background-color: rgb(255, 253, 134);
 }
 
 input[type=submit] {
@@ -90,10 +89,6 @@ input[type=submit]:hover {
 .material-icons {
     margin-left: 40%;
     color: blue;
-}
-
-p {
-    color: rgb(106, 106, 107);
 }
 
 .form {
