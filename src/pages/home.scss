@@ -1,0 +1,184 @@
+/*General Style*/
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    line-height: 30px;
+}
+  /*GS*/
+  h1 {
+    text-shadow: 5px 9px 0 rgba(0, 0, 0, 0.15);
+    margin: 40px 0px;
+    font-weight: bolder;
+  }
+  nav {
+    border-bottom: 3px solid darkgray ;
+  }
+  #slogan {
+    font-weight: bolder;
+    font-size: xx-large;
+  }
+  /*services section*/
+  .services_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px;
+  }
+  /*services*/
+  .services {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin: 40px;
+    flex-wrap: wrap;
+  }
+  /*service*/
+  .service {
+    display: flex;
+    flex-direction: column;
+    min-width: 33%;
+    justify-self: right;
+    margin-bottom: 20px;
+  }
+  .service img,
+  .service h3,
+  .service article {
+    align-self: center;
+  }
+  .service img :hover{
+    display: none ;
+    transition: all 2s;
+    transform: scale(1.2 deg);
+  }
+  /*mediaQurey for services section */
+  @media screen and (max-width: 650px) {
+    .services {
+      flex-direction: column;
+    }
+  }
+  
+  /*review slider*/
+  
+  .mySlides {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0px 100px;
+  }
+  .mySlides img{
+    margin-right: 35px;
+  }
+  .mySlides h3{
+    color: black;
+  }
+  .carousel-control-next-icon, .carousel-control-prev-icon{
+   display: none;
+  }
+  @media screen and (max-width : 500px){
+    .mySlides {
+      padding : 0px 25px
+    }
+    .mySlides section{
+      text-align: left;
+    }
+  }
+  /*promise section*/
+  .promises_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .promises {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .promise {
+    margin: 50px;
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  /*Gs*/
+  section article {
+    text-align: center;
+  }
+  section h3 {
+    margin: 15px 0px;
+  }
+  section h1{
+    text-align: center;
+  }
+  @media screen and (max-width: 850px) {
+    /*  */
+    .promises_section article {
+      text-align: center;
+    }
+    .promise h3,
+    .promise article {
+      text-align: center;
+      margin: 10px -70px;
+    }
+  }
+  /*not other company section*/
+  .not_other {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+  }
+  .not_other img,
+  .not_other section {
+    max-width: 45%;
+    border-radius: 20px;
+  }
+  .not_other section {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+  .not_other section article{
+    text-align: left;
+  }
+  .work_data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .datum {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    text-align: left;
+    font-weight: 900;
+     #nmbr{
+      
+       text-align: center;
+      font-size: xx-large;
+      font-weight: 900;
+      color: lightskyblue;
+      color: white;
+      background-color: darkblue;
+      border-radius: 100%;
+      max-width: 50px;
+      min-height: 50px;
+       padding-top: 9px;
+       padding-left: -9px;
+    }
+   }
+  @media screen and (max-width:1000px){
+    .not_other{
+      flex-direction: column;
+    }
+    .not_other img{
+      max-width : 100%;
+    }
+  }
+  @media screen and (max-width:600px){
+    .not_other section{
+      min-width: 100%;
+    }
+  }
