@@ -67,7 +67,7 @@
     padding: 0px 100px;
   }
   .mySlides img{
-    margin-right: 35px;
+    margin-right: 20px;
   }
   .mySlides h3{
     color: black;
@@ -177,8 +177,11 @@
       max-width : 100%;
     }
   }
-  @media screen and (max-width:600px){
+  @media screen and (max-width:770px){
     .not_other section{
-      min-width: 100%;
+      min-width: 95%;
+      h3{
+        font-size: 22px;
+      }
     }
   }
