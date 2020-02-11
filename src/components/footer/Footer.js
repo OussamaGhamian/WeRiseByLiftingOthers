@@ -7,7 +7,7 @@ export default class footer extends Component {
     render() {
         return (
             <footer>
-                <div class="container">
+                <div className="container">
                     <section>
                         <h6>About us</h6>
                         <article>
@@ -30,7 +30,7 @@ export default class footer extends Component {
                     </section>
                     <section>
                         <h6>Subscribe Newsletter</h6>
-                        <div class="combine">
+                        <div className="combine">
                             <input type="email" placeholder="Enter Email" />
                             <input type="button" value="Send" />
                         </div>

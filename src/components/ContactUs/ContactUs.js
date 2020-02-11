@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './contact us.css'
-import Section from "../Section"
+
 
 export default class contactus extends Component{
     render() {
         return (
 
             <div className="App" >
-                <div className="container">
+                <div className="Container1">
                     <div className="name">
                         <h2>Contact Us</h2>
                     </div>

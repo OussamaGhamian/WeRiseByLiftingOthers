@@ -4,11 +4,11 @@ body {
     background-color: whitesmoke;
 }
 
-.container {
+.Container1 {
     font-style: italic;
     margin: 1%;
     padding: 10%;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
 }
 
 h2 {
