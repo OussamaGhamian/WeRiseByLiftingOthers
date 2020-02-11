@@ -1,6 +1,6 @@
 import React from 'react'
 import * as ReactBootstrap from 'react-bootstrap'
-import Slide from './slide'
+import Slide from './Slide'
 export default function Slider() {
 
     const [index, setIndex] = React.useState(0);

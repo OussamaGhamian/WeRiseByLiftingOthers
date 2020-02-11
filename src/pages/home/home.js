@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import './home.scss'
-import Hero from '../components/hero'
-import Service from '../components/service'
-import Slider from '../components/slider'
-import Promise from'../components/promise'
-import NotOterComp from '../components/NOC'
+import Hero from '../../components/hero/Hero'
+import Service from '../../components/Service'
+import Slider from '../../components/Slider'
+import Promise from'../../components/Promise'
+import NotOterComp from '../../components/Noc'
 export default class Home extends Component {
     render() {
         return (

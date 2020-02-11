@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import "./footer.css"
-import twitter from '../images/twitter.png'
-import facebook from '../images/facebook.png'
-import insta from '../images/instagram.png'
+import twitter from '../../images/twitter.png'
+import facebook from '../../images/facebook.png'
+import insta from '../../images/instagram.png'
 export default class footer extends Component {
     render() {
         return (

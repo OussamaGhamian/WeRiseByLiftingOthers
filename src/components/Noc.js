@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import sideImg from '../images/hero.jpg'
-import Datum from './datum'
+import Datum from './Datum'
 export default class Noc extends Component {
     render() {
         return (
