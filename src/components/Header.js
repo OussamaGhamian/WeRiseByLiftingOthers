@@ -1,11 +1,12 @@
 import React    , { Component } from 'react'
 import * as ReactBootstrap from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import logo from '../images/158149895785144590.png'
 export default class Header extends Component {
     render() {
         return (
             <ReactBootstrap.Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <ReactBootstrap.Navbar.Brand href="/Home" id = "slogan">hands 4 Life</ReactBootstrap.Navbar.Brand>
+                <ReactBootstrap.Navbar.Brand href="/Home" id = "slogan"><img src={logo} /></ReactBootstrap.Navbar.Brand>
                 <ReactBootstrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <ReactBootstrap.Navbar.Collapse id="responsive-navbar-nav">
                     <ReactBootstrap.Nav className="mr-auto">
