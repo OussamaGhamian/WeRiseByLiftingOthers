@@ -8,6 +8,7 @@ import Services from './components/Services/Services'
 import Faq from './components/Faqs/Faqs'
 import HowItWork from './components/howItWorks/HowItWorks'
 import ContactUs from './components/ContactUs/ContactUs'
+import Ourteam from './pages/Ourteam'
 export default class App extends Component {
   render() {
     return (
@@ -25,6 +26,7 @@ export default class App extends Component {
             <Route path='/ContactUs' component={ContactUs} />
             <Route path='/Services' component={Services} />
             <Route path='/Faq' component={Faq} />
+            <Route path='/OurTeam' component={Ourteam} />
             <Route path='/' component={Home} />
 
           </Switch>
