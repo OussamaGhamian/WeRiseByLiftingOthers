@@ -38,6 +38,7 @@ h2 {
         flex-direction: column;
         align-items: center;
     }
+    .fak,
     .num,
     .email {
         margin-left: 0px;
@@ -217,12 +218,11 @@ body {
 
 .timeline ul li .time h4 {
     margin: 0;
-    padding: 0;
+    padding: 7px;
     font-size: 14px;
     background: rgb(23, 124, 207);
     color: #fff;
     border-radius: 15px;
-    box-shadow: 0 0 0 3px rgb(193, 235, 8);
     text-align: center;
 }
 
