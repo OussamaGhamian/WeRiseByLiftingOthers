@@ -4,7 +4,7 @@ import Datum from './Datum'
 export default class Noc extends Component {
     render() {
         return (
-            <section class="not_other">
+            <section class="not_other" id="lastse">
                 <img src={sideImg} alt="sideImage" />
                 <section>
                     <h3>We Are Not Just Another Coding Company.</h3>
