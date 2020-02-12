@@ -4,8 +4,8 @@ import Header from './components/Header'
 import Home from "./pages/home/home"
 import Portfolio from './components/portfolio/Portfolio'
 import Footer from './components/footer/Footer'
-import Services from './components/services/Cards'
-import Faq from './components/faq/Faqs'
+import Services from './components/Services/Services'
+import Faq from './components/Faqs/Faqs'
 import HowItWork from './components/howItWorks/HowItWorks'
 import ContactUs from './components/ContactUs/ContactUs'
 export default class App extends Component {

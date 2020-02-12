@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 
 import Faq from './Faq';
-import './faqs.css';
+
+import './Faqs.css';
 
 function Faqs () {
   const [faqs, setfaqs] = useState([

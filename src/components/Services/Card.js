@@ -4,7 +4,7 @@ import React from 'react'
 function Card ({card}) {
 	return (
         <div className="containar" key={Math.random}>
-        <img className="card-image" src={`http://localhost:3000/images/${card.image}.jpg`} alt="" />
+        <img className="card-image" src={`http://localhost:3001/${card.image}.jpg`} alt="" />
         <div className="card">
           <div className="card-title">
             {card.title}
