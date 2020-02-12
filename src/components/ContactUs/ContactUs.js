@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './contact us.css'
+import './ContactUs.css'
 
 
 export default class contactus extends Component{

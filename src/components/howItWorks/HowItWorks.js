@@ -8,7 +8,7 @@ import {
 import ReactDOM from 'react-dom';
 
 import { render } from '@testing-library/react';
-import './how it works.css'
+import './HowItWorks.css'
 import Section from "../Section"
 export default class HowItWorks extends Component  {
     render() {

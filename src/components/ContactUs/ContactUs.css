@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap');
+
+
+.Container1 {
+    width: 80%;
+    font-style: italic;
+    margin: 20px auto;
+    padding: 10px;
+  
+}
+
+h2 {
+    text-align: center;
+    color: blue;
+}
+
+.three {
+    display: flex;
+    justify-content: space-between;
+    
+}
+.num,
+.email,
+.fak {
+    max-width: 33%
+}
+.num{
+    margin-right: 100px;
+}
+
+
+   
+
+input[type=text],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: blue;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: rgb(36, 179, 7);
+}
+
+
+
+
+
+.material-icons {
+    margin-left: 40%;
+    color: blue;
+}
+
+.form {
+    background-color: white;
+    padding: 3%;
+    background-color: transparent;
+}
+@media (max-width: 500px) {
+    .Container1 {
+        width: 100%;
+      
+        margin: 20px auto;
+        padding: 10px;
+       
+    }
+    .three {
+        margin: 20px auto;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    
+       align-items: center;
+       
+    }
+    .num,
+.email,
+.fak {
+    max-width: 80%;
+}
+.num{
+    margin-right: 0;
+}
+    
+
+
+    
+
+}
+
+
