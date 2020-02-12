@@ -214,24 +214,7 @@ body {
     border-radius: 18px;
 }
 
-.timeline ul li .time h4 {
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    background: rgba(233, 33, 99, 1);
-    color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 0 0 3px rgba(233, 33, 99, 0.3);
-    text-align: center;
-}
 
-
-/*@media screen and (max-width: 600px) {
-    .timeline {
-      float: none;
-      width: 100%;
-    }
-  }*/
 
 @media (max-width: 1000px) {
     .timeline {
