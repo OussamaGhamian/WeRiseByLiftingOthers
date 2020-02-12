@@ -5,7 +5,7 @@ export default class Header extends Component {
     render() {
         return (
             <ReactBootstrap.Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <ReactBootstrap.Navbar.Brand href="#home" id = "slogan">hands 4 Life</ReactBootstrap.Navbar.Brand>
+                <ReactBootstrap.Navbar.Brand href="/Home" id = "slogan">hands 4 Life</ReactBootstrap.Navbar.Brand>
                 <ReactBootstrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <ReactBootstrap.Navbar.Collapse id="responsive-navbar-nav">
                     <ReactBootstrap.Nav className="mr-auto">

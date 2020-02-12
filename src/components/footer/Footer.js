@@ -16,10 +16,12 @@ export default class footer extends Component {
                     <section>
                         <h6>Quik Links</h6>
                         <ul>
-                            <li><a href="">About us</a></li>
-                            <li><a href="">Services</a></li>
-                            <li><a href="">Testimonials</a></li>
-                            <li><a href="">Contact Us</a></li>
+                            <li><a href="/Home">Home</a></li>
+                            <li><a href="/Portfolio">Portfolio</a></li>
+                            <li><a href="/HIT">How it works</a></li>
+                            <li><a href="/ContactUs">Contact Us</a></li>
+                            <li><a href="/Services">Services</a></li>
+                            <li><a href="/Faq">FAQ</a></li>
                         </ul>
                     </section>
                     <section>
