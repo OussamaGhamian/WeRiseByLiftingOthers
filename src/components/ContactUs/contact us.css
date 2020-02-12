@@ -106,7 +106,7 @@ body {
 
 .timeline {
     position: relative;
-    padding: 40px 0;
+    /* padding: 40px 0; */
     margin: 50px auto;
     width: 1000px;
     box-sizing: border-box;
@@ -235,7 +235,6 @@ body {
 @media (max-width:500px) {
     .timeline {
         width: 100%;
-        padding-bottom: 0;
     }
     .timeline:before {
         left: 20px;
