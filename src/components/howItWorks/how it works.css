@@ -26,8 +26,7 @@ h2 {
 }
 
 .num,
-.email,
-.fak {
+.email,.fak{
     max-width: 33%
 }
 
