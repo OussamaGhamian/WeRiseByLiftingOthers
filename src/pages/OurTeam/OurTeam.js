@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBRow, MDBCard, MDBCardBody } from "mdbreact";
-import Avatar from '../../components/Avatar'
+import Avatar from '../../Components/Avatar'
 export default class Ourteam extends React.Component {
     render() {
         return (

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap");
 
-.timeline {
+.HowItWorks .timeline {
   position: relative;
   padding: 40px 0;
   margin: 50px auto;
@@ -9,12 +9,12 @@
   width: 80%;
 }
 
-.timeline ul {
+.HowItWorks .timeline ul {
   padding: 0;
   margin: 0;
 }
 
-.timeline ul li {
+.HowItWorks .timeline ul li {
   list-style: none;
   position: relative;
   width: 50%;
@@ -22,7 +22,7 @@
   box-sizing: border-box;
 }
 
-.timeline:before {
+.HowItWorks .timeline:before {
   content: "";
   position: absolute;
   left: 50%;
@@ -32,23 +32,23 @@
   background: #c5c5c5;
 }
 
-.timeline ul li:nth-child(odd) {
+.HowItWorks .timeline ul li:nth-child(odd) {
   float: left;
   text-align: right;
   clear: both;
 }
 
-.timeline ul li:nth-child(even) {
+.HowItWorks .timeline ul li:nth-child(even) {
   float: right;
   text-align: left;
   clear: both;
 }
 
-.content {
+.HowItWorks .content {
   padding-bottom: 20px;
 }
 
-.timeline ul li:nth-child(odd):before {
+.HowItWorks .timeline ul li:nth-child(odd):before {
   content: "";
   position: absolute;
   top: 28px;
@@ -60,7 +60,7 @@
   box-shadow: 0 0 0 3px rgba(233, 33, 99, 0.2);
 }
 
-.timeline ul li:nth-child(even):before {
+.HowItWorks .timeline ul li:nth-child(even):before {
   content: "";
   position: absolute;
   top: 28px;
@@ -72,19 +72,19 @@
   box-shadow: 0 0 0 3px rgba(233, 33, 99, 0.2);
 }
 
-.timeline ul li h3 {
+.HowItWorks .timeline ul li h3 {
   margin: 0;
   padding: 0;
   font-weight: 600;
   color: rgb(23, 124, 207);
 }
 
-.timeline ul li p {
+.HowItWorks .timeline ul li p {
   margin: 10px 0 0;
   padding: 0;
 }
 
-.timeline ul li:nth-child(odd).time {
+.HowItWorks .timeline ul li:nth-child(odd).time {
   position: absolute;
   top: 12px;
   right: -165px;
@@ -96,7 +96,7 @@
   box-shadow: 0 0 0 3px rgba(233, 33, 99, 0.3);
 }
 
-.timeline ul li:nth-child(even).time {
+.HowItWorks .timeline ul li:nth-child(even).time {
   position: absolute;
   top: 12px;
   left: -165px;
@@ -107,7 +107,7 @@
   border-radius: 18px;
 }
 
-.timeline ul li .time h4 {
+.HowItWorks .timeline ul li .time h4 {
   margin: 0;
   padding: 5px;
   font-size: 14px;
@@ -119,27 +119,27 @@
 }
 
 @media (max-width: 767px) {
-  .timeline {
+  .HowItWorks .timeline {
     width: 100%;
     padding-bottom: 0;
   }
-  .timeline:before {
+  .HowItWorks .timeline:before {
     left: 20px;
   }
-  .timeline ul li:nth-child(odd),
-  .timeline ul li:nth-child(even) {
+  .HowItWorks .timeline ul li:nth-child(odd),
+  .HowItWorks .timeline ul li:nth-child(even) {
     width: 100%;
     text-align: left;
     padding-left: 50px;
     padding-bottom: 50px;
   }
-  .timeline li:nth-child(odd):before,
-  .timeline li:nth-child(even):before {
+  .HowItWorks .timeline li:nth-child(odd):before,
+  .HowItWorks .timeline li:nth-child(even):before {
     top: -18px;
     left: 16px;
   }
-  .timeline li:nth-child(odd) .time,
-  .timeline li:nth-child(even) .time {
+  .HowItWorks .timeline li:nth-child(odd) .time,
+  .HowItWorks .timeline li:nth-child(even) .time {
     top: -30px;
     left: 50px;
     right: inherit;
@@ -148,7 +148,7 @@
 
 
 @media screen and (min-width: 767px) {
-    .timeline ul li:nth-child(even):before {
+  .HowItWorks .timeline ul li:nth-child(even):before {
       left: -4px;
     }
   }

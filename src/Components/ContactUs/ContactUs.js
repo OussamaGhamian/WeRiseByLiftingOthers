@@ -6,7 +6,7 @@ export default class contactus extends Component{
     render() {
         return (
 
-            <div className="App" >
+            <div className="ContactUs" >
                 <div className="Container1">
                     <div className="name">
                         <h2>Contact Us</h2>

@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap');
 
 
-.Container1 {
+.ContactUs .Container1 {
     width: 80%;
     font-style: italic;
     margin: 20px auto;
@@ -10,31 +10,31 @@
   
 }
 
-h2 {
+.ContactUs h2 {
     text-align: center;
     color: blue;
 }
 
-.three {
+.ContactUs .three {
     display: flex;
     justify-content: space-between;
     
 }
-.num,
-.email,
-.fak {
+.ContactUs .num,
+.ContactUs .email,
+.ContactUs .fak {
     max-width: 33%
 }
-.num{
+.ContactUs .num{
     margin-right: 100px;
 }
 
 
    
 
-input[type=text],
-select,
-textarea {
+.ContactUs input[type=text],
+.ContactUs select,
+.ContactUs textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -45,7 +45,7 @@ textarea {
     resize: vertical;
 }
 
-input[type=submit] {
+.ContactUs input[type=submit] {
     background-color: blue;
     color: white;
     padding: 12px 20px;
@@ -54,7 +54,7 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
+.ContactUs input[type=submit]:hover {
     background-color: rgb(36, 179, 7);
 }
 
@@ -62,25 +62,25 @@ input[type=submit]:hover {
 
 
 
-.material-icons {
+.ContactUs .material-icons {
     margin-left: 40%;
     color: blue;
 }
 
-.form {
+.ContactUs .form {
     background-color: white;
     padding: 3%;
     background-color: transparent;
 }
 @media (max-width: 500px) {
-    .Container1 {
+    .ContactUs  .Container1 {
         width: 100%;
       
         margin: 20px auto;
         padding: 10px;
        
     }
-    .three {
+   .ContactUs  .three {
         margin: 20px auto;
         padding: 10px;
         width: 100%;
@@ -90,12 +90,12 @@ input[type=submit]:hover {
        align-items: center;
        
     }
-    .num,
-.email,
-.fak {
+    .ContactUs .num,
+    .ContactUs .email,
+    .ContactUs .fak {
     max-width: 80%;
 }
-.num{
+.ContactUs .num{
     margin-right: 0;
 }
     
