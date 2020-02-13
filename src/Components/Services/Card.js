@@ -8,7 +8,7 @@ function Card ({card}) {
         <div className="containar" key={Math.random}>
         <img className="card-image"  src={pic1} alt="" />
         {/* src={`http://localhost:3001/${card.image}.jpg`} */ }
-        <div className="card">
+        <div className="card1">
           <div className="card-title">
             {card.title}
           </div>

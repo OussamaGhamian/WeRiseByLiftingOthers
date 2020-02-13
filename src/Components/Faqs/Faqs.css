@@ -48,6 +48,7 @@
   padding: 10px;
   overflow-y: hidden;
   transition: all 0.4s ease-out;
+  cursor: pointer;
 }
 
 .faqs .faq.open .faq-question {
