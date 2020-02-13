@@ -1,7 +1,6 @@
 import React from "react";
 import {  MDBCol, MDBIcon } from "mdbreact";
-import {MDBAvatar} from 'mdbreact'
-import * as d from 'mdbreact'
+
 
 export default function Avatar() {
     return (
