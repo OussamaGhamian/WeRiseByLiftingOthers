@@ -60,7 +60,10 @@ footer {
   }
   footer .container section {
     margin-bottom: 20px;
-    text-align: center;
+    
+  }
+  footer .container section article{
+    text-align: left;
   }
   footer .container section .combine {
     display: flex;
@@ -84,8 +87,8 @@ footer {
     footer .container section {
       min-width: 100%;
     }
-    footer section {
-      text-align: center;
+    footer .container section .combine{
+      justify-content: left;
     }
     footer hr {
       margin: 30px -20px;
