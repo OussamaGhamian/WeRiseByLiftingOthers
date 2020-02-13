@@ -1,10 +1,11 @@
 import React from "react";
 import { MDBRow, MDBCard, MDBCardBody } from "mdbreact";
 import Avatar from '../../Components/Avatar'
+import "./OurTeam.css"
 export default class Ourteam extends React.Component {
     render() {
         return (
-
+            
             <MDBCardBody >
                 <h2 className="h1-responsive font-weight-bold my-5">
                     Our amazing team
