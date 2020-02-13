@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './home.scss'
-import Hero from '../../components/hero/Hero'
+import './Home.scss'
+import Hero from '../../components/Hero/Hero'
 import Service from '../../components/Service'
 import Slider from '../../components/Slider'
 import Promise from'../../components/Promise'

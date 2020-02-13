@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "./footer.css"
+import "./Footer.css"
 import twitter from '../../images/twitter.png'
 import facebook from '../../images/facebook.png'
 import insta from '../../images/instagram.png'

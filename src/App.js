@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Header from './components/Header'
-import Home from "./pages/home/home"
+import Home from "./pages/Home/Home"
 import Portfolio from './components/portfolio/Portfolio'
-import Footer from './components/footer/Footer'
+import Footer from './components/Footer/Footer'
 import Services from './components/Services/Services'
 import Faq from './components/Faqs/Faqs'
 import HowItWork from './components/howItWorks/HowItWorks'
 import ContactUs from './components/ContactUs/ContactUs'
-import Ourteam from './pages/Ourteam'
+import OurTeam from './pages/OurTeam/OurTeam'
 export default class App extends Component {
   render() {
     return (
@@ -26,7 +26,7 @@ export default class App extends Component {
             <Route path='/ContactUs' component={ContactUs} />
             <Route path='/Services' component={Services} />
             <Route path='/Faq' component={Faq} />
-            <Route path='/OurTeam' component={Ourteam} />
+            <Route path='/OurTeam' component={OurTeam} />
             <Route path='/' component={Home} />
 
           </Switch>
