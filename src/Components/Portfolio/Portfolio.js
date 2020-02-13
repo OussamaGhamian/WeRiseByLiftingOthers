@@ -8,9 +8,9 @@ import {
 import ReactDOM from 'react-dom';
 
 import { render } from '@testing-library/react';
-import './porfolio.css';
+import './Porfolio.css';
 import image1 from '../../images/download.png'
-import DataImage from "../dataimage/Dataimg"
+import DataImage from "../DataPortfolio/DataPortfolio"
 
 export default class portfolio extends Component {
     render() {
