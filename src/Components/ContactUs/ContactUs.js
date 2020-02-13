@@ -6,11 +6,7 @@ export default class contactus extends Component{
     render() {
         return (
 
-<<<<<<< HEAD:src/components/ContactUs/ContactUs.js
-        <div className="App">
-=======
             <div className="ContactUs" >
->>>>>>> 73db1c967786f54beddb3413e1dfd045d1e0cf2b:src/Components/ContactUs/ContactUs.js
                 <div className="Container1">
                     <div className="name">
                         <h2>Contact Us</h2>
