@@ -18,7 +18,7 @@ export default function Avatar() {
                 Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
                 consectetur, adipisci sed quia non numquam modi tempora eius.
               </p>
-            <ul className="list-unstyled mb-0">
+            {/* <ul className="list-unstyled mb-0">
                 <a href="#!" className="p-2 fa-lg">
                     <MDBIcon fab icon="facebook-f" className="blue-text" />
                 </a>
@@ -28,7 +28,7 @@ export default function Avatar() {
                 <a href="#!" className="p-2 fa-lg">
                     <MDBIcon fab icon="instagram" className="blue-text" />
                 </a>
-            </ul>
+            </ul> */}
         </MDBCol>
     );
 }
