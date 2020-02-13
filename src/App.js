@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Header from './components/Header'
+import Header from './Components/Header'
 import Home from "./pages/Home/Home"
-import Portfolio from './components/portfolio/Portfolio'
-import Footer from './components/Footer/Footer'
-import Services from './components/Services/Services'
-import Faq from './components/Faqs/Faqs'
-import HowItWork from './components/howItWorks/HowItWorks'
-import ContactUs from './components/ContactUs/ContactUs'
+import Portfolio from './Components/Portfolio/Portfolio'
+import Footer from './Components/Footer/Footer'
+import Services from './Components/Services/Services'
+import Faq from './Components/Faqs/Faqs'
+import HowItWork from './Components/HowItWorks/HowItWorks'
+import ContactUs from './Components/ContactUs/ContactUs'
 import OurTeam from './pages/OurTeam/OurTeam'
 export default class App extends Component {
   render() {
