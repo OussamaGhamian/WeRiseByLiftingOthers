@@ -6,7 +6,7 @@ import Portfolio from './components/portfolio/Portfolio'
 import Footer from './components/footer/Footer'
 import Services from './components/Services/Services'
 import Faq from './components/Faqs/Faqs'
-import HowItWork from './components/howItWorks/HowItWorks'
+import HowItWork from './components/HowItWorks/HowItWorks'
 import ContactUs from './components/ContactUs/ContactUs'
 export default class App extends Component {
   render() {
