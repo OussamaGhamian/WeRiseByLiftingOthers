@@ -19,6 +19,19 @@
   
     justify-content: center;
   }
+  .cards div:nth-child(odd){
+    width: 80%;
+    max-height: 275px;
+    overflow: hidden;
+  
+  
+    margin: 0 auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: row-reverse;
+  
+    justify-content: center;
+  }
   .card-image {
     width: 50%;
   
