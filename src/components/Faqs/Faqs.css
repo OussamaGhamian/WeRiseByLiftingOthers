@@ -18,6 +18,8 @@
   font-size: 20px;
   padding-right: 80px;
 
+  cursor: pointer;
+
   transition: all 0.4s ease;
 }
 
@@ -62,8 +64,7 @@
 }
 @media screen and (max-width: 767px) {
   .faqs .faq .faq-question,
-  .faqs .faq .faq-answe
-   {
+  .faqs .faq .faq-answe {
     margin: 5px;
     padding: 5px;
     font-size: 15px;
