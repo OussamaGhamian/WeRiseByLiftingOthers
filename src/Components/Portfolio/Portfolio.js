@@ -26,6 +26,8 @@ export default class portfolio extends Component {
                             <img className="portI" src={image1} />
                             <h1>dsd</h1>
                         </a>
+                        </div>
+                        <div className="fmDiv">
                         <a href={DataImage} target="_blank">
                             <img className="portI" src={image1} />
                             <h1>dsd</h1>
@@ -34,6 +36,7 @@ export default class portfolio extends Component {
                             <img className="portI" src={image1} />
                             <h1>dsd</h1>
                         </a>
+                        
                     </div>
                     <div className="fmDiv">
 
@@ -45,6 +48,8 @@ export default class portfolio extends Component {
                             <img className="portI" src={image1} />
                             <h1>dsd</h1>
                         </a>
+                        </div>
+                        <div className="fmDiv">
                         <a href={DataImage} target="_blank">
                             <img className="portI" src={image1} />
                             <h1>dsd</h1>
@@ -53,7 +58,8 @@ export default class portfolio extends Component {
                             <img className="portI" src={image1} />
                             <h1>dsd</h1>
                         </a>
-                    </div>
+                        </div>
+                    
 
                 </div>
             </div>
