@@ -22,6 +22,8 @@ footer {
   /*check*/
   
   footer .container :nth-child(2) ul li {
+    /* text-align: left; */
+    text-justify: ;
     list-style-type: none;
     text-decoration: none;
   }

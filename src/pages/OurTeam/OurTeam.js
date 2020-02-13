@@ -5,7 +5,7 @@ export default class Ourteam extends React.Component {
     render() {
         return (
 
-            <MDBCardBody>
+            <MDBCardBody >
                 <h2 className="h1-responsive font-weight-bold my-5">
                     Our amazing team
               </h2>
