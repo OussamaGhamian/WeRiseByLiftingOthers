@@ -1,40 +1,20 @@
 {
-  "name": "we_rise_by_lifting_others",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.12.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "bootstrap": "^4.4.1",
-    "mdbreact": "^4.25.1",
-    "node-sass": "^4.13.1",
-    "react": "^16.12.0",
-    "react-bootstrap": "^1.0.0-beta.16",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "name": "project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "cd front && npm test && cd ../back && npm test",
+      "back": "cd back && npm start",
+      "front": "cd front && npm start",
+      "start": "concurrently --kill-others-on-fail --names \"back,front\" \"npm run back\" \"npm run front\"",
+      "postinstall": "cd front && npm install && cd .. && cd back && npm install"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "concurrently": "^4.0.1"
+    }
   }
-}
+  

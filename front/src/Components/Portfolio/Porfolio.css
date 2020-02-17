@@ -1,0 +1,35 @@
+.fmDiv {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20%;
+  margin-top: 5%;
+  width: 100%;
+  justify-content: space-evenly ;
+  text-align: center;
+}
+h1{
+ text-decoration: none;
+}
+a {
+  text-decoration: none;
+}
+.fmDiv :hover {
+  opacity: 0.5;
+}
+.portI {
+  border: gray 2px solid;
+}
+
+@media only screen and (max-width: 900px) {
+  .fmDiv {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: space-evenly;
+  }
+}
+@media only screen and (max-width: 486px) {
+  .fmDiv {
+    display: grid;
+    grid-template-columns: none;
+    justify-content: space-evenly;
+  }
+}
