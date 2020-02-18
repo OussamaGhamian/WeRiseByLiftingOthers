@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBRow, MDBCard, MDBCardBody } from "mdbreact";
+import { MDBRow, MDBCardBody } from "mdbreact";
 import Avatar from '../../Components/Avatar'
 import "./OurTeam.css"
 export default class Ourteam extends React.Component {
