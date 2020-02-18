@@ -31,7 +31,7 @@ const initializeDatabase = async () => {
   
     const getFaqsByID = async id => {
       try {
-        const rows = await db.all(
+        const rows = await db.get(
           `SELECT  id, question, answer FROM faq where id=${id}`
         );
         if (rows.length == 0) {
