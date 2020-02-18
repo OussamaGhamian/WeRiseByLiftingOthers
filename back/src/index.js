@@ -9,7 +9,7 @@ const start = async () => {
 
  
 //  this start code for faqs
-  app.get("/faq", async (req, res, next) => {
+  app.get("/faqs", async (req, res, next) => {
     const { orderBy } = req.query;
     try {
       const result = await controller.getFaqs(orderBy);
@@ -29,7 +29,7 @@ const start = async () => {
     }
   });
 
-  app.get("/faqs/create", async (req, res, next) => {
+  app.get("/faq/create", async (req, res, next) => {
     const { question, answer } = req.query;
   
     try {
@@ -40,7 +40,7 @@ const start = async () => {
     }
   });
 
-  app.get("/faqs/delete/:id", async (req, res, next) => {
+  app.get("/faq/delete/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
       const result = await controller.deleteFaq(id);
@@ -50,9 +50,10 @@ const start = async () => {
     }
   });
 
-  app.get("/faqs/update/:id", async (req, res, next) => {
+  app.get("/faq/update/:id", async (req, res, next) => {
     const { id } = req.params;
     const { question, answer} = req.query;
+    // console.log(`${id} , ${question} , ${answer}`)
     try {
       const result = await controller.updateFaq(id, { question, answer });
       res.json({ success: true, result });
