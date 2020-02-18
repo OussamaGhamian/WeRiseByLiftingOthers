@@ -19,6 +19,18 @@ const start = async () => {
     }
   });
 
+
+  app.get("/faq/create", async (req, res, next) => {
+    const { question, answer } = req.query;
+  console.log(question,answer)
+    try {
+      const result = await controller.createFaq({ question, answer });
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+  
   app.get("/faq/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -29,16 +41,6 @@ const start = async () => {
     }
   });
 
-  app.get("/faq/create", async (req, res, next) => {
-    const { question, answer } = req.query;
-  
-    try {
-      const result = await controller.createFaq({ question, answer });
-      res.json({ success: true, result });
-    } catch (err) {
-      next(err);
-    }
-  });
 
   app.get("/faq/delete/:id", async (req, res, next) => {
     const { id } = req.params;

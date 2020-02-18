@@ -48,6 +48,7 @@ const initializeDatabase = async () => {
       if (!props || !question || !answer) {
         throw new Error(`You must provide a question and answer`);
       }
+      console.log(question,answer)
       try {
         const result = await db.run(
           `Insert into faq (question, answer) values ('${question}', '${answer}')`
