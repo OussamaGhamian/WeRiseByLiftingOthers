@@ -1,5 +1,5 @@
 import React from "react";
-import {  MDBCol, MDBIcon } from "mdbreact";
+import { MDBCol } from "mdbreact";
 
 
 export default function Avatar() {
