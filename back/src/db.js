@@ -7,7 +7,7 @@ const initializeDatabase = async () => {
     // this start code for faqs
 
     const getFaqs = async orderBy => {
-      let stmt = "SELECT id, question, answer FROM faqs";
+      let stmt = "SELECT id, question, answer FROM faq";
       switch (orderBy) {
         case "question":
           stmt += " order by question desc";
@@ -32,7 +32,7 @@ const initializeDatabase = async () => {
     const getFaqsByID = async id => {
       try {
         const rows = await db.all(
-          `SELECT  id, question, answer FROM faqs where id=${id}`
+          `SELECT  id, question, answer FROM faq where id=${id}`
         );
         if (rows.length == 0) {
           throw new Error(`faq with id ${id} is not found`);
@@ -50,7 +50,7 @@ const initializeDatabase = async () => {
       }
       try {
         const result = await db.run(
-          `Insert into faqs (question, answer) values ('${question}', '${answer}')`
+          `Insert into faq (question, answer) values ('${question}', '${answer}')`
         );
         return result.stmt.lastID;
       } catch (err) {
@@ -61,7 +61,7 @@ const initializeDatabase = async () => {
     const deleteFaq= async id => {
       try {
         const result = await db.run(
-          `Delete from faqs where id = ${id}`
+          `Delete from faq where id = ${id}`
         );
         if (result.stmt.changes == 0) {
           throw new Error(`Faq with id ${id} doesnt exist`);
@@ -80,12 +80,12 @@ const initializeDatabase = async () => {
   
       let stmt = "";
       if (question && answer) {
-        stmt = `update faqs set quetion = '${question}', answer= '${answer}' where id = ${id} `;
+        stmt = `update faq set quetion = '${question}', answer= '${answer}' where id = ${id} `;
      
       } else if (question && !answer) {
-        stmt = `update faqs set quetion = '${question}' where id = ${id} `;
+        stmt = `update faq set quetion = '${question}' where id = ${id} `;
       } else {
-        stmt = `update faqs set  answer = '${answer}' where id = ${id} `;
+        stmt = `update faq set  answer = '${answer}' where id = ${id} `;
       }
       try {
         const result = await db.run(stmt);
