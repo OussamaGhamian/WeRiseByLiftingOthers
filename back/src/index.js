@@ -3,7 +3,72 @@ import initializeDatabase from "./db";
 
 
 const start = async () => {
+    
+  const controller = await initializeDatabase();
 
+
+ 
+//  this start code for faqs
+  app.get("/faq", async (req, res, next) => {
+    const { orderBy } = req.query;
+    try {
+      const result = await controller.getFaqs(orderBy);
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  app.get("/faq/:id", async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const result = await controller.getFaqsByID(id);
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  app.get("/faqs/create", async (req, res, next) => {
+    const { question, answer } = req.query;
+  
+    try {
+      const result = await controller.createFaq({ question, answer });
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  app.get("/faqs/delete/:id", async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const result = await controller.deleteFaq(id);
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  app.get("/faqs/update/:id", async (req, res, next) => {
+    const { id } = req.params;
+    const { question, answer} = req.query;
+    try {
+      const result = await controller.updateFaq(id, { question, answer });
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+  app.use((err, req, res, next) => {
+    res.status(500).json({ success: false, message: err });
+  });
+
+//   this end code for faqs
+
+  app.listen(8080, () => {
+    console.log("Listening on port 8080");
+  });
 
 
 
