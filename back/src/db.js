@@ -80,10 +80,10 @@ const initializeDatabase = async () => {
   
       let stmt = "";
       if (question && answer) {
-        stmt = `update faq set quetion = '${question}', answer= '${answer}' where id = ${id} `;
+        stmt = `update faq set question = '${question}', answer= '${answer}' where id = ${id} `;
      
       } else if (question && !answer) {
-        stmt = `update faq set quetion = '${question}' where id = ${id} `;
+        stmt = `update faq set question = '${question}' where id = ${id} `;
       } else {
         stmt = `update faq set  answer = '${answer}' where id = ${id} `;
       }
