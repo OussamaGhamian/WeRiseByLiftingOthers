@@ -30,7 +30,7 @@ const start = async () => {
       next(err);
     }
   });
-  
+
   app.get("/faq/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -63,11 +63,70 @@ const start = async () => {
       next(err);
     }
   });
-  app.use((err, req, res, next) => {
-    res.status(500).json({ success: false, message: err });
-  });
+
 
 //   this end code for faqs
+
+// This Start Code For Portfoio
+
+app.get("/portfolio", async (req, res, next) => {
+  const { orderBy } = req.query;
+  try {
+    const result = await controller.getPortfolio(orderBy);
+    res.json({ success: true, result });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
+app.get("/portfolio/delete/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const result = await controller.deletePortfolio(id);
+    res.json({ success: true, result });
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get("/portfolio/update/:id", async (req, res, next) => {
+  const { id } = req.params;
+  const {title, description , image, url} = req.query;
+
+  try {
+    const result = await controller.updatePortfolio(id, { title, description , image,url});
+    res.json({ success: true, result });
+  } catch (err) {
+    next(err);
+  }
+});
+app.get("/portfolio/create", async (req, res, next) => {
+  const {title, description , image,url } = req.query;
+  console.log(title, description , image)
+  try {
+    const result = await controller.createPortfolio({ title, description , image,url });
+    res.json({ success: true, result });
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get("/portfolio/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const result = await controller.getPortfolioByID(id);
+    res.json({ success: true, result });
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.use((err, req, res, next) => {
+  res.status(500).json({ success: false, message: err });
+});
+// This End Code For Portfoio
 
   app.listen(8080, () => {
     console.log("Listening on port 8080");
