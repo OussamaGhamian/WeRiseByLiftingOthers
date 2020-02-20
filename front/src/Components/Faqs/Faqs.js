@@ -12,9 +12,23 @@ class Faqs extends Component {
     this.state = { faqs: [], error: "" };
   }
 
+   getFaqs= async () => {
+    try {
+      const response = await fetch("http://localhost:8080/faqs");
+      const result = await response.json();
+      
+      if (result.success) {
+        this.setState({ faqs: result.result, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err });
+    }
+  };
 
-   toggleFAQ = index => {
-    setfaqs(faqs.map((faq, i) => {
+  toggleFAQ = index => {
+    (this.state.faqs.map((faq, i) => {
       if (i === index) {
         faq.open = !faq.open
       } else {
@@ -27,28 +41,15 @@ class Faqs extends Component {
 
 
   async componentDidMount() {
-    getFaqs= async () => {
-      try {
-        const response = await fetch("http://localhost:8080/faqs");
-        const result = await response.json();
-        
-        if (result.success) {
-          this.setState({ faqs: result.result, error: "" });
-        } else {
-          this.setState({ error: result.message });
-        }
-      } catch (err) {
-        this.setState({ error: err });
-      }
-    };
+ this.getFaqs();
   }
 
 render(){
   return (
     <div className="App">
       <div className="faqs">
-        {faqs.map((faq, i) => (
-          <Faq faq={faq} index={i} toggleFAQ={toggleFAQ} />
+        {this.state.faqs.map((faq, i) => (
+          <Faq faq={faq} index={i} toggleFAQ={this.toggleFAQ} />
         ))}
       </div>
     </div>
