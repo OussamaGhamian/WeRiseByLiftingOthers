@@ -75,7 +75,7 @@ const initializeDatabase = async () => {
     } else if (!question && answer) {
       stmt = `update faq set  answer = '${answer}' where id = ${id} `;
     } else {
-      throw new Error(`You must provide a quetion or an answer`);
+      throw new Error(`You must provide a question or an answer`);
     }
     try {
       const result = await db.run(stmt);
@@ -89,7 +89,7 @@ const initializeDatabase = async () => {
 
   // this start code for service
   const getServices = async orderBy => {
-    let stmt = "SELECT id, title, description FROM service";
+    let stmt = "SELECT * FROM service";
     switch (orderBy) {
       case "title":
         stmt += " order by service desc";

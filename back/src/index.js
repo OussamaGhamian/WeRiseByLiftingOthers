@@ -12,7 +12,7 @@ const start = async () => {
       next(err);
     }
   });
-  app.post("/faq/create", async (req, res, next) => {
+  app.post("/faq/", async (req, res, next) => {
     const { question, answer } = req.body;
 
     try {
@@ -33,7 +33,7 @@ const start = async () => {
     }
   });
 
-  app.get("/faq/delete/:id", async (req, res, next) => {
+  app.delete("/faq/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
       const result = await controller.deleteFaq(id);
@@ -43,9 +43,10 @@ const start = async () => {
     }
   });
 
-  app.get("/faq/update/:id", async (req, res, next) => {
+  app.put("/faq/:id", async (req, res, next) => {
     const { id } = req.params;
-    const { question, answer } = req.query;
+    console.log(req.body)
+    const { question, answer } = req.body;
 
     try {
       const result = await controller.updateFaq(id, { question, answer });
@@ -65,8 +66,8 @@ const start = async () => {
       next(err);
     }
   });
-  app.get("/service/create", async (req, res, next) => {
-    const { title, description, image } = req.query;
+  app.post("/service", async (req, res, next) => {
+    const { title, description, image } = req.body;
     try {
       const result = await controller.createService({
         title,
@@ -87,7 +88,7 @@ const start = async () => {
       next(err);
     }
   });
-  app.get("/service/delete/:id", async (req, res, next) => {
+  app.delete("/service/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
       const result = await controller.deleteService(id);
@@ -96,9 +97,9 @@ const start = async () => {
       next(err);
     }
   });
-  app.get("/service/update/:id", async (req, res, next) => {
+  app.put("/service/:id", async (req, res, next) => {
     const { id } = req.params;
-    const { title, description, image } = req.query;
+    const { title, description, image } = req.body;
     try {
       const result = await controller.updateService(id, {
         title,
@@ -219,7 +220,7 @@ const start = async () => {
       next(err)
     }
   })
-  app.get(`/home/deletePromise/:id`, async (req, res, next) => {
+  app.delete(`/home/promise/:id`, async (req, res, next) => {
     const { id } = req.params
     try {
       const result = await controller.deletePromise(id)
@@ -229,8 +230,8 @@ const start = async () => {
       next(err)
     }
   })
-  app.get(`/home/addPromise`, async (req, res, next) => {
-    const { title, description } = req.query
+  app.post(`/home/Promise`, async (req, res, next) => {
+    const { title, description } = req.body
     try {
       const result = await controller.addPromise(title, description)
       res.json({ success: true, result })
@@ -239,8 +240,8 @@ const start = async () => {
       next(err)
     }
   })
-  app.get(`/home/updatePromise/:id`, async (req, res, next) => {
-    const { title, description } = req.query
+  app.put(`/home/promise/:id`, async (req, res, next) => {
+    const { title, description } = req.body
     const { id } = req.params
     try {
       const result = await controller.updatePromise(id, title, description)
@@ -317,9 +318,8 @@ const start = async () => {
     }
   });
 
-
-  app.get("/ContactUs/create", async (req, res, next) => {
-    const { fname, lname, message } = req.query;
+  app.post("/ContactUs", async (req, res, next) => {
+    const { fname, lname, message } = req.body;
     try {
       const result = await controller.createContactUs({ fname, lname, message });
       console.log(result)
@@ -340,7 +340,7 @@ const start = async () => {
   });
 
 
-  app.get("/ContactUs/delete/:id", async (req, res, next) => {
+  app.delete("/ContactUs/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
       const result = await controller.deleteContactUs(id);
@@ -349,30 +349,21 @@ const start = async () => {
       next(err);
     }
   });
-
-  app.get("/ContactUs/update/:id", async (req, res, next) => {
-    const { id } = req.params;
-    const { fname, lname, message } = req.query;
-    try {
-      const result = await controller.updateContactUs(id, { fname, lname, message });
-      res.json({ success: true, result });
-    } catch (err) {
-      next(err);
-    }
-  });
+  // No need to update the info of a user
+  // app.get("/ContactUs/update/:id", async (req, res, next) => {
+  //   const { id } = req.params;
+  //   const { fname, lname, message } = req.query;
+  //   try {
+  //     const result = await controller.updateContactUs(id, { fname, lname, message });
+  //     res.json({ success: true, result });
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // });
 
   // This Start Code For Portfoio
-  app.get("/portfolio", async (req, res, next) => {
-    const { orderBy } = req.query;
-    try {
-      const result = await controller.getPortfolio(orderBy);
-      res.json({ success: true, result });
-    } catch (err) {
-      next(err);
-    }
-  });
 
-  app.get("/portfolio/delete/:id", async (req, res, next) => {
+  app.delete("/portfolio/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
       const result = await controller.deletePortfolio(id);
@@ -382,9 +373,9 @@ const start = async () => {
     }
   });
 
-  app.get("/portfolio/update/:id", async (req, res, next) => {
+  app.put("/portfolio/:id", async (req, res, next) => {
     const { id } = req.params;
-    const { title, description, image, url } = req.query;
+    const { title, description, image, url } = req.body;
 
     try {
       const result = await controller.updatePortfolio(id, { title, description, image, url });
@@ -393,8 +384,8 @@ const start = async () => {
       next(err);
     }
   });
-  app.get("/portfolio/create", async (req, res, next) => {
-    const { title, description, image, url } = req.query;
+  app.post("/portfolio", async (req, res, next) => {
+    const { title, description, image, url } = req.body;
     console.log(title, description, image)
     try {
       const result = await controller.createPortfolio({ title, description, image, url });
@@ -413,10 +404,17 @@ const start = async () => {
       next(err);
     }
   });
-
-  app.use((err, req, res, next) => {
-    res.status(500).json({ success: false, message: err });
+  app.get("/portfolio", async (req, res, next) => {
+    const { orderBy } = req.query;
+    try {
+      const result = await controller.getPortfolio(orderBy);
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
   });
+
+
   // This End Code For Portfoio
 
 
@@ -533,7 +531,7 @@ const start = async () => {
   // This End For Testimonial
 
   app.use((err, req, res, next) => {
-    res.status(500).json({ success: false, message: err.message});
+    res.status(500).json({ success: false, message: err.message });
   });
 
   app.listen(8080, () => {
