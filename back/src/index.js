@@ -12,8 +12,8 @@ const start = async () => {
       next(err);
     }
   });
-  app.get("/faq/create", async (req, res, next) => {
-    const { question, answer } = req.query;
+  app.post("/faq/create", async (req, res, next) => {
+    const { question, answer } = req.body;
 
     try {
       const result = await controller.createFaq({ question, answer });
