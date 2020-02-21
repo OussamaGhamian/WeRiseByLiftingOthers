@@ -1,22 +1,23 @@
+import React, { Component } from "react";
 
-import React,{Component} from 'react';
+import Faq from "./Faq";
 
-import Faq from './Faq';
-
-import './Faqs.css';
-
+import "./Faqs.css";
 
 class Faqs extends Component {
   constructor(props) {
     super(props);
-    this.state = { faqs: [], error: "" };
+    this.state = {
+      faqs: [],
+      error: ""
+    };
   }
 
-   getFaqs= async () => {
+  getFaqs = async () => {
     try {
       const response = await fetch("http://localhost:8080/faqs");
       const result = await response.json();
-      
+      console.log(result)
       if (result.success) {
         this.setState({ faqs: result.result, error: "" });
       } else {
@@ -28,33 +29,36 @@ class Faqs extends Component {
   };
 
   toggleFAQ = index => {
-    (this.state.faqs.map((faq, i) => {
+    const newFaqs = this.state.faqs.map((faq, i) => {
       if (i === index) {
-        faq.open = !faq.open
+        faq.open = !faq.open;
+        {console.log(faq.open)}
+      
       } else {
         faq.open = false;
       }
-
       return faq;
-    }))
-  }
-
+    });
+    this.setState({
+      faqs: newFaqs
+    })
+  };
 
   async componentDidMount() {
- this.getFaqs();
+    this.getFaqs();
   }
 
-render(){
-  return (
-    <div className="App">
-      <div className="faqs">
-        {this.state.faqs.map((faq, i) => (
-          <Faq faq={faq} index={i} toggleFAQ={this.toggleFAQ} />
-        ))}
+  render() {
+    return (
+      <div className="App">
+        <div className="faqs">
+          {this.state.faqs.map((faq, i) => (
+            <Faq faq={faq} index={i} toggleFAQ={this.toggleFAQ} />
+          ))}
+        </div>
       </div>
-    </div>
-  );
-        }
+    );
+  }
 }
 
-export default Faqs ;
+export default Faqs;
