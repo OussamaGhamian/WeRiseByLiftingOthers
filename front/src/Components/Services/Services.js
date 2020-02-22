@@ -1,53 +1,46 @@
-import React, { useState } from 'react';
-import Card from './Card';
-import './Services.css';
+import React, { Component } from "react";
+import Card from "./Card";
+import "./Services.css";
 
-
-function Services() {
-  const [cards] = useState([
-    {
-      id: 1,
-      title: ' hardware issues.',
-      descition: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      image: "pic1"
-
-    },
-    {
-      id: 2,
-      title: 'sfhdfdg Viewer.',
-      descition: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      image: "pic2"
-
-    },
-    {
-      id: 3,
-      title: 'This manydd d d d  .',
-      descition: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      image: "pic3"
-
-
-    },
-    {
-      id: 4,
-      title: 'hardware issues.',
-      descition: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-      image: "pic4"
-
+class Services extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { cards: [], error: "" };
+  }
+  getServices = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/services");
+      const result = await response.json();
+      // console.log(result);
+      if (result.success) {
+        this.setState({ cards: result.result, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err });
     }
-  ]);
+  };
 
+  async componentDidMount() {
+    this.getServices();
+    this.showCards()
+  }
 
+  showCards = () => console.log(this.state.cards);
 
-
-  return (
-    <div className="App">
-      <div className="cards">
-        {cards.map((card) => (
-         <Card card={card } />
-        ))}
+  render() {
+    return (
+      <div className="App">
+        <div className="cards">
+          {this.showCards()}
+          {this.state.cards.map((card, i) => (
+            <Card card={card} index={i} />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Services;

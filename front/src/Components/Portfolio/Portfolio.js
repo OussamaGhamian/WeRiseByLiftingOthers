@@ -8,6 +8,8 @@ import DataImage from "../DataPortfolio/DataPortfolio"
 
 export default class Portfolio extends Component {
 
+ 
+    
     render() {
         return (
             <div className="App">

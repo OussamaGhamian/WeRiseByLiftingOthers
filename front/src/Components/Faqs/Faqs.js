@@ -1,51 +1,64 @@
+import React, { Component } from "react";
 
-import React, { useState } from 'react';
+import Faq from "./Faq";
 
-import Faq from './Faq';
+import "./Faqs.css";
 
-import './Faqs.css';
+class Faqs extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      faqs: [],
+      error: ""
+    };
+  }
 
-function Faqs () {
-  const [faqs, setfaqs] = useState([
-    {
-      question: 'How many programmers does it take to screw in a lightbulb?',
-      answer: 'None. We don\'t address hardware issues.',
-      open: true
-    },
-    {
-      question: 'Who is the most awesome person?',
-      answer: 'You. The Viewer.',
-      open: false
-    },
-    {
-      question: 'How many questions does it take to make a successful FAQ Page?',
-      answer: 'This many.',
-      open: false
+  getFaqs = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/faqs");
+      const result = await response.json();
+      console.log(result)
+      if (result.success) {
+        this.setState({ faqs: result.result, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err });
     }
-  ]);
+  };
 
-  const toggleFAQ = index => {
-    setfaqs(faqs.map((faq, i) => {
+  toggleFAQ = index => {
+    const newFaqs = this.state.faqs.map((faq, i) => {
       if (i === index) {
-        faq.open = !faq.open
+        faq.open = !faq.open;
+        {console.log(faq.open)}
+      
       } else {
         faq.open = false;
       }
-
       return faq;
-    }))
+    });
+    this.setState({
+      faqs: newFaqs
+    })
+  };
+
+  async componentDidMount() {
+    this.getFaqs();
   }
 
-
-  return (
-    <div className="App">
-      <div className="faqs">
-        {faqs.map((faq, i) => (
-          <Faq faq={faq} index={i} toggleFAQ={toggleFAQ} />
-        ))}
+  render() {
+    return (
+      <div className="App">
+        <div className="faqs">
+          {this.state.faqs.map((faq, i) => (
+            <Faq faq={faq} index={i} toggleFAQ={this.toggleFAQ} />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default Faqs ;
+export default Faqs;
