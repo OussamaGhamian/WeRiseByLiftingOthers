@@ -127,7 +127,7 @@ const initializeDatabase = async () => {
   const getServicesByID = async id => {
     try {
       const rows = await db.all(
-        `SELECT  id, title, description FROM service where id=${id}`
+        `SELECT  * FROM service where id=${id}`
       );
       if (rows.length == 0) {
         throw new Error(`Service with id ${id} is not found`);
@@ -260,7 +260,7 @@ const initializeDatabase = async () => {
   //here hero code starts
   const getHero = async () => {
     try {
-      const result = await db.all(`select * from hero where id = 1`);
+      const result = await db.all(`select * from hero where id = 3`);
       if (result.length == 0) throw new Error(`No hero to retreive.`);
       return result;
     } catch (err) {
@@ -269,7 +269,9 @@ const initializeDatabase = async () => {
   };
   const deleteHero = async () => {
     try {
-      const result = await db.run(`delete from hero where id = 1 `);
+      const result = await db.run(
+        `update hero set name = '' , image = '' , slogan = '' , btn = '' where id = 3`
+      );
       if (result.stmt.changes == 0)
         throw new Error(`Member with ID 1 does not exist.`);
       return true;
@@ -279,11 +281,8 @@ const initializeDatabase = async () => {
   };
   const updateHero = async (name, image, slogan, btn) => {
     try {
-      await db.run(
-        `insert into hero  (name, image , slogan , btn) values ('','','','')  `
-      );
       const result = await db.run(
-        `update hero set name = '${name}' , image = '${image}' , slogan = '${slogan}' , btn = '${btn}' where id = 1`
+        `update hero set name = '${name}' , image = '${image}' , slogan = '${slogan}' , btn = '${btn}' where id = 3`
       );
       console.log(result);
       if (result.stmt.changes == 0)
@@ -541,7 +540,7 @@ const initializeDatabase = async () => {
     else {
       "please provid me fname or lname or message"
     }
-    
+
     try {
       const result = await db.run(stmt);
 
@@ -554,306 +553,306 @@ const initializeDatabase = async () => {
     }
   };
   // this End code for ContactUs
-    // this Start Code For Portfolio 
+  // this Start Code For Portfolio 
 
-    const getPortfolio = async orderBy => {
-      let stmt = "SELECT id, title, description , image , url FROM portfolio";
-      switch (orderBy) {
-        case "title":
-          stmt += " order by title desc";
-          break;
-        case "description":
-          stmt += " order by description desc";
-          break;
-        case "image":
-          stmt += " order by image desc";
-        case "url":
-          stmt += " order by url desc";
-          break;
-        default:
-          break;
+  const getPortfolio = async orderBy => {
+    let stmt = "SELECT id, title, description , image , url FROM portfolio";
+    switch (orderBy) {
+      case "title":
+        stmt += " order by title desc";
+        break;
+      case "description":
+        stmt += " order by description desc";
+        break;
+      case "image":
+        stmt += " order by image desc";
+      case "url":
+        stmt += " order by url desc";
+        break;
+      default:
+        break;
+    }
+    try {
+      const rows = await db.all(stmt);
+
+      return rows;
+    } catch (err) {
+      throw new Error("Could not retrieve list of portfolio");
+    }
+  };
+
+  const getPortfolioByID = async id => {
+    try {
+      const rows = await db.get(
+        `SELECT  id, title, description , image , url FROM portfolio where id=${id}`
+      );
+      if (rows.length == 0) {
+        throw new Error(`portfolio with id ${id} is not found`);
       }
-      try {
-        const rows = await db.all(stmt);
-  
-        return rows;
-      } catch (err) {
-        throw new Error("Could not retrieve list of portfolio");
+      return rows;
+    } catch (err) {
+      throw new Error("Could not retrieve portfolio");
+    }
+  };
+
+  const createPortfolio = async props => {
+    const { title, description, image, url } = props;
+    if (!props || !title || !description || !image || !url) {
+      throw new Error(`You must provide a title and description and image and url `);
+    }
+    try {
+      const result = await db.run(
+        `Insert into portfolio (title, description , image ,url ) values ('${title}', '${description}', '${image}','${url}')`
+      );
+      return result.stmt.lastID;
+    } catch (err) {
+      throw new Error("This combination doesnt work");
+    }
+  };
+
+  const deletePortfolio = async id => {
+    try {
+      const result = await db.run(
+        `Delete from portfolio where id = ${id}`
+      );
+      if (result.stmt.changes == 0) {
+        throw new Error(`portfolio with id ${id} doesnt exist`);
       }
-    };
-  
-    const getPortfolioByID = async id => {
-      try {
-        const rows = await db.get(
-          `SELECT  id, title, description , image , url FROM portfolio where id=${id}`
-        );
-        if (rows.length == 0) {
-          throw new Error(`portfolio with id ${id} is not found`);
-        }
-        return rows;
-      } catch (err) {
-        throw new Error("Could not retrieve portfolio");
+      return true;
+    } catch (err) {
+      throw new Error(`Could not delete portfolio with id ${id}` + err);
+    }
+  };
+
+  const updatePortfolio = async (id, props) => {
+    const { title, description, image, url } = props;
+    if (!props && !(props.title && props.description && props.image && props.url)) {
+      throw new Error(`You must provide a title or an description or an image or an url`);
+    }
+
+    let stmt = "";
+    if (title && description && image && url) {
+      stmt = `update portfolio set image = '${image}',title = '${title}',description = '${description}',url = '${url}' where id = ${id} `;
+
+    } else if (title && !description && !image && !url) {
+      stmt = `update portfolio set title = '${title}' where id = ${id} `;
+    }
+    else if (description && !title && !image && !url) {
+      stmt = `update portfolio set description = '${description}' where id = ${id} `;
+
+    } else if (image && !description && !title && !url) {
+      stmt = `update portfolio set image = '${image}' where id = ${id} `;
+    } else {
+      stmt = `update portfolio set  url = '${url}' where id = ${id} `;
+    }
+    console.log(title, description, image, url)
+    try {
+      const result = await db.run(stmt);
+
+      if (result.stmt.changes == 0) {
+        throw new Error(`portfolio with id ${id} doesnt exist`);
       }
-    };
-  
-    const createPortfolio = async props => {
-      const { title, description, image, url } = props;
-      if (!props || !title || !description || !image || !url) {
-        throw new Error(`You must provide a title and description and image and url `);
+      return true;
+    } catch (err) {
+      throw new Error(`Could not update portfolio with id ${id}` + err);
+    }
+  };
+
+  // This End Code For Porfolio
+
+  // This Start Code For Core 
+  const getCore = async orderBy => {
+    let stmt = "SELECT id, title, description, image FROM coreService";
+    switch (orderBy) {
+      case "title":
+        stmt += " order by title desc";
+        break;
+      case "description":
+        stmt += " order by description desc";
+        break;
+      case "image":
+        stmt += " order by image desc";
+        break;
+      default:
+        break;
+    }
+    try {
+      const rows = await db.all(stmt);
+      return rows;
+    } catch (err) {
+      throw new Error("Could not retrieve list of coreService");
+    }
+  };
+
+  const getCoreByID = async id => {
+    try {
+      const rows = await db.get(
+        `SELECT  id, title, description , image  FROM coreService where id=${id}`
+      );
+      if (rows.length == 0) {
+        throw new Error(`coreService with id ${id} is not found`);
       }
-      try {
-        const result = await db.run(
-          `Insert into portfolio (title, description , image ,url ) values ('${title}', '${description}', '${image}','${url}')`
-        );
-        return result.stmt.lastID;
-      } catch (err) {
-        throw new Error("This combination doesnt work");
+      return rows;
+    } catch (err) {
+      throw new Error("Could not retrieve coreService");
+    }
+  };
+
+  const createCore = async props => {
+    const { title, description, image } = props;
+    if (!props || !title || !description || !image) {
+      throw new Error(`You must provide a title and description and image`);
+    }
+    try {
+      const result = await db.run(
+        `Insert into coreService (title, description , image ) values ('${title}', '${description}', '${image}')`
+      );
+      return result.stmt.lastID;
+    } catch (err) {
+      throw new Error("This combination doesnt work");
+    }
+  };
+
+  const deleteCore = async id => {
+    try {
+      const result = await db.run(
+        `Delete from coreService where id = ${id}`
+      );
+      if (result.stmt.changes == 0) {
+        throw new Error(`coreService with id ${id} doesnt exist`);
       }
-    };
-  
-    const deletePortfolio = async id => {
-      try {
-        const result = await db.run(
-          `Delete from portfolio where id = ${id}`
-        );
-        if (result.stmt.changes == 0) {
-          throw new Error(`portfolio with id ${id} doesnt exist`);
-        }
-        return true;
-      } catch (err) {
-        throw new Error(`Could not delete portfolio with id ${id}` + err);
+      return true;
+    } catch (err) {
+      throw new Error(`Could not delete coreService with id ${id}` + err);
+    }
+  };
+
+  const updateCore = async (id, props) => {
+    const { title, description, image } = props;
+    if (!props && !(props.title && props.description && props.image)) {
+      throw new Error(`You must provide a title or an description or an image`);
+    }
+
+    let stmt = "";
+    if (title && description && image) {
+      stmt = `update coreService set title = '${title}', description= '${description}', image= '${image}' where id = ${id} `;
+
+    } else if (title && !description && !image) {
+      stmt = `update coreService set title = '${title}' where id = ${id} `;
+    } else if (description && !title && !image) {
+      stmt = `update coreService set description = '${description}' where id = ${id} `;
+    } else {
+      stmt = `update coreService set  image = '${image}' where id = ${id} `;
+    }
+    try {
+      const result = await db.run(stmt);
+
+      if (result.stmt.changes == 0) {
+        throw new Error(`coreService with id ${id} doesnt exist`);
       }
-    };
-  
-    const updatePortfolio = async (id, props) => {
-      const { title, description, image, url } = props;
-      if (!props && !(props.title && props.description && props.image && props.url)) {
-        throw new Error(`You must provide a title or an description or an image or an url`);
+      return true;
+    } catch (err) {
+      throw new Error(`Could not update coreService with id ${id}` + err);
+    }
+  };
+
+  // THIS End Code For Core
+  // This Start Tstimonial
+  const getTestimonial = async orderBy => {
+    let stmt = "SELECT id, name, recommendation, image FROM testimonial";
+    switch (orderBy) {
+      case "name":
+        stmt += " order by name desc";
+        break;
+      case "recommendation":
+        stmt += " order by recommendation desc";
+        break;
+      case "image":
+        stmt += " order by image desc";
+        break;
+      default:
+        break;
+    }
+    try {
+      const rows = await db.all(stmt);
+      return rows;
+    } catch (err) {
+      throw new Error("Could not retrieve list of testimonial");
+    }
+  };
+
+  const getTestimonialByID = async id => {
+    try {
+      const rows = await db.get(
+        `SELECT  id, name, recommendation , image  FROM testimonial where id=${id}`
+      );
+      if (rows.length == 0) {
+        throw new Error(`testimonial with id ${id} is not found`);
       }
-  
-      let stmt = "";
-      if (title && description && image && url) {
-        stmt = `update portfolio set image = '${image}',title = '${title}',description = '${description}',url = '${url}' where id = ${id} `;
-  
-      } else if (title && !description && !image && !url) {
-        stmt = `update portfolio set title = '${title}' where id = ${id} `;
+      return rows;
+    } catch (err) {
+      throw new Error("Could not retrieve testimonial");
+    }
+  };
+
+  const createTestimonial = async props => {
+    const { name, recommendation, image } = props;
+    if (!props || !name || !recommendation || !image) {
+      throw new Error(`You must provide a name and recommendation and image`);
+    }
+    try {
+      const result = await db.run(
+        `Insert into testimonial (name, recommendation , image ) values ('${name}', '${recommendation}', '${image}')`
+      );
+      return result.stmt.lastID;
+    } catch (err) {
+      throw new Error("This combination doesnt work");
+    }
+  };
+
+  const deleteTestimonial = async id => {
+    try {
+      const result = await db.run(
+        `Delete from testimonial where id = ${id}`
+      );
+      if (result.stmt.changes == 0) {
+        throw new Error(`testimonial with id ${id} doesnt exist`);
       }
-      else if (description && !title && !image && !url) {
-        stmt = `update portfolio set description = '${description}' where id = ${id} `;
-  
-      } else if (image && !description && !title && !url) {
-        stmt = `update portfolio set image = '${image}' where id = ${id} `;
-      } else {
-        stmt = `update portfolio set  url = '${url}' where id = ${id} `;
+      return true;
+    } catch (err) {
+      throw new Error(`Could not delete testimonial with id ${id}` + err);
+    }
+  };
+
+  const updateTestimonial = async (id, props) => {
+    const { name, recommendation, image } = props;
+    if (!props && !(props.name && props.recommendation && props.image)) {
+      throw new Error(`You must provide a name or an recommendation or an image`);
+    }
+
+    let stmt = "";
+    if (name && recommendation && image) {
+      stmt = `update testimonial set name = '${name}', recommendation= '${recommendation}', image= '${image}' where id = ${id} `;
+
+    } else if (name && !recommendation && !image) {
+      stmt = `update testimonial set name = '${name}' where id = ${id} `;
+    } else if (recommendation && !name && !image) {
+      stmt = `update testimonial set recommendation = '${recommendation}' where id = ${id} `;
+    } else {
+      stmt = `update testimonial set  image = '${image}' where id = ${id} `;
+    }
+    try {
+      const result = await db.run(stmt);
+
+      if (result.stmt.changes == 0) {
+        throw new Error(`testimonial with id ${id} doesnt exist`);
       }
-      console.log(title, description, image, url)
-      try {
-        const result = await db.run(stmt);
-  
-        if (result.stmt.changes == 0) {
-          throw new Error(`portfolio with id ${id} doesnt exist`);
-        }
-        return true;
-      } catch (err) {
-        throw new Error(`Could not update portfolio with id ${id}` + err);
-      }
-    };
-  
-    // This End Code For Porfolio
-  
-    // This Start Code For Core 
-    const getCore = async orderBy => {
-      let stmt = "SELECT id, title, description, image FROM coreService";
-      switch (orderBy) {
-        case "title":
-          stmt += " order by title desc";
-          break;
-        case "description":
-          stmt += " order by description desc";
-          break;
-        case "image":
-          stmt += " order by image desc";
-          break;
-        default:
-          break;
-      }
-      try {
-        const rows = await db.all(stmt);
-        return rows;
-      } catch (err) {
-        throw new Error("Could not retrieve list of coreService");
-      }
-    };
-  
-    const getCoreByID = async id => {
-      try {
-        const rows = await db.get(
-          `SELECT  id, title, description , image  FROM coreService where id=${id}`
-        );
-        if (rows.length == 0) {
-          throw new Error(`coreService with id ${id} is not found`);
-        }
-        return rows;
-      } catch (err) {
-        throw new Error("Could not retrieve coreService");
-      }
-    };
-  
-    const createCore = async props => {
-      const { title, description, image } = props;
-      if (!props || !title || !description || !image) {
-        throw new Error(`You must provide a title and description and image`);
-      }
-      try {
-        const result = await db.run(
-          `Insert into coreService (title, description , image ) values ('${title}', '${description}', '${image}')`
-        );
-        return result.stmt.lastID;
-      } catch (err) {
-        throw new Error("This combination doesnt work");
-      }
-    };
-  
-    const deleteCore = async id => {
-      try {
-        const result = await db.run(
-          `Delete from coreService where id = ${id}`
-        );
-        if (result.stmt.changes == 0) {
-          throw new Error(`coreService with id ${id} doesnt exist`);
-        }
-        return true;
-      } catch (err) {
-        throw new Error(`Could not delete coreService with id ${id}` + err);
-      }
-    };
-  
-    const updateCore = async (id, props) => {
-      const { title, description, image } = props;
-      if (!props && !(props.title && props.description && props.image)) {
-        throw new Error(`You must provide a title or an description or an image`);
-      }
-  
-      let stmt = "";
-      if (title && description && image) {
-        stmt = `update coreService set title = '${title}', description= '${description}', image= '${image}' where id = ${id} `;
-  
-      } else if (title && !description && !image) {
-        stmt = `update coreService set title = '${title}' where id = ${id} `;
-      } else if (description && !title && !image) {
-        stmt = `update coreService set description = '${description}' where id = ${id} `;
-      } else {
-        stmt = `update coreService set  image = '${image}' where id = ${id} `;
-      }
-      try {
-        const result = await db.run(stmt);
-  
-        if (result.stmt.changes == 0) {
-          throw new Error(`coreService with id ${id} doesnt exist`);
-        }
-        return true;
-      } catch (err) {
-        throw new Error(`Could not update coreService with id ${id}` + err);
-      }
-    };
-  
-    // THIS End Code For Core
-    // This Start Tstimonial
-    const getTestimonial = async orderBy => {
-      let stmt = "SELECT id, name, recommendation, image FROM testimonial";
-      switch (orderBy) {
-        case "name":
-          stmt += " order by name desc";
-          break;
-        case "recommendation":
-          stmt += " order by recommendation desc";
-          break;
-        case "image":
-          stmt += " order by image desc";
-          break;
-        default:
-          break;
-      }
-      try {
-        const rows = await db.all(stmt);
-        return rows;
-      } catch (err) {
-        throw new Error("Could not retrieve list of testimonial");
-      }
-    };
-  
-    const getTestimonialByID = async id => {
-      try {
-        const rows = await db.get(
-          `SELECT  id, name, recommendation , image  FROM testimonial where id=${id}`
-        );
-        if (rows.length == 0) {
-          throw new Error(`testimonial with id ${id} is not found`);
-        }
-        return rows;
-      } catch (err) {
-        throw new Error("Could not retrieve testimonial");
-      }
-    };
-  
-    const createTestimonial = async props => {
-      const { name, recommendation, image } = props;
-      if (!props || !name || !recommendation || !image) {
-        throw new Error(`You must provide a name and recommendation and image`);
-      }
-      try {
-        const result = await db.run(
-          `Insert into testimonial (name, recommendation , image ) values ('${name}', '${recommendation}', '${image}')`
-        );
-        return result.stmt.lastID;
-      } catch (err) {
-        throw new Error("This combination doesnt work");
-      }
-    };
-  
-    const deleteTestimonial = async id => {
-      try {
-        const result = await db.run(
-          `Delete from testimonial where id = ${id}`
-        );
-        if (result.stmt.changes == 0) {
-          throw new Error(`testimonial with id ${id} doesnt exist`);
-        }
-        return true;
-      } catch (err) {
-        throw new Error(`Could not delete testimonial with id ${id}` + err);
-      }
-    };
-  
-    const updateTestimonial = async (id, props) => {
-      const { name, recommendation, image } = props;
-      if (!props && !(props.name && props.recommendation && props.image)) {
-        throw new Error(`You must provide a name or an recommendation or an image`);
-      }
-  
-      let stmt = "";
-      if (name && recommendation && image) {
-        stmt = `update testimonial set name = '${name}', recommendation= '${recommendation}', image= '${image}' where id = ${id} `;
-  
-      } else if (name && !recommendation && !image) {
-        stmt = `update testimonial set name = '${name}' where id = ${id} `;
-      } else if (recommendation && !name && !image) {
-        stmt = `update testimonial set recommendation = '${recommendation}' where id = ${id} `;
-      } else {
-        stmt = `update testimonial set  image = '${image}' where id = ${id} `;
-      }
-      try {
-        const result = await db.run(stmt);
-  
-        if (result.stmt.changes == 0) {
-          throw new Error(`testimonial with id ${id} doesnt exist`);
-        }
-        return true;
-      } catch (err) {
-        throw new Error(`Could not update testimonial with id ${id}` + err);
-      }
-    };
-    // This End Testimonial
+      return true;
+    } catch (err) {
+      throw new Error(`Could not update testimonial with id ${id}` + err);
+    }
+  };
+  // This End Testimonial
 
 
   const controller = {
