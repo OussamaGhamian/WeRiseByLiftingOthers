@@ -14,9 +14,15 @@
   nav {
     border-bottom: 3px solid darkgray ;
   }
-  #slogan {
+ h3{
+   margin: 50px 0px !important;
+ }
+ article{
+   margin-bottom: 30px;
+ }
+  .navbar-nav{
     font-weight: bolder;
-    font-size: xx-large;
+    font-size: larger;
   }
   /*services section*/
   .services_section {
@@ -72,6 +78,7 @@
   .mySlides img{
     margin-right: 20px;
     border-radius : 100%;
+    min-width: 225px;
   }
   .mySlides h3{
     color: black;

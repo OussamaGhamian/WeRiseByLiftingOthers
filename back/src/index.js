@@ -239,7 +239,7 @@ const start = async () => {
       next(err)
     }
   })
-  app.post(`/home/Promise`, async (req, res, next) => {
+  app.post(`/home/promise`, async (req, res, next) => {
     const { title, description } = req.body
     try {
       const result = await controller.addPromise(title, description)
@@ -470,6 +470,7 @@ const start = async () => {
   });
   app.post("/testimonial", upload, async (req, res, next) => {
     const { name, recommendation } = req.body;
+    console.log(recommendation)
     const image = req.file.path
     try {
       const result = await controller.createTestimonial({ name, recommendation, image });
@@ -498,7 +499,7 @@ const start = async () => {
   });
   app.put("/testimonial/:id", upload, async (req, res, next) => {
     const { id } = req.params;
-    const { name, recommendation} = req.body;
+    const { name, recommendation } = req.body;
     const image = req.file.path
     try {
       const result = await controller.updateTestimonial(id, { name, recommendation, image });

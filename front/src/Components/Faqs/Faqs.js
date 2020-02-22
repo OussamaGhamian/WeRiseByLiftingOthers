@@ -32,8 +32,6 @@ class Faqs extends Component {
     const newFaqs = this.state.faqs.map((faq, i) => {
       if (i === index) {
         faq.open = !faq.open;
-        {console.log(faq.open)}
-      
       } else {
         faq.open = false;
       }

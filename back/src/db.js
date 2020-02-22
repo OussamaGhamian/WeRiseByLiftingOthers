@@ -794,11 +794,13 @@ const initializeDatabase = async () => {
   };
 
   const createTestimonial = async props => {
+    console.log(props)
     const { name, recommendation, image } = props;
     if (!props || !name || !recommendation || !image) {
       throw new Error(`You must provide a name and recommendation and image`);
     }
     try {
+      // console.log(`Insert into testimonial (name, recommendation , image ) values ('${name}', '${recommendation}', '${image}')`)
       const result = await db.run(
         `Insert into testimonial (name, recommendation , image ) values ('${name}', '${recommendation}', '${image}')`
       );
@@ -818,7 +820,7 @@ const initializeDatabase = async () => {
       }
       return true;
     } catch (err) {
-      throw new Error(`Could not delete testimonial with id ${id}` + err);
+      throw new Error(`Could not delete testimonial with id ${id} ` + err);
     }
   };
 

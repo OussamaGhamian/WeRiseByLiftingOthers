@@ -13,6 +13,10 @@ export default class Home extends Component {
             heroErr: "",
             services: [],
             servicesErr: "",
+            testimonials: [],
+            testimonialErr: "",
+            promises: [],
+            promisesErr: "",
         }
     }
     getHero = async () => {
@@ -29,27 +33,45 @@ export default class Home extends Component {
         try {
             const response = await fetch('http://localhost:8080/core')
             const result = await response.json()
-            console.log(result.result)
             result.success ? this.setState({ services: result.result }) : this.setState({ heroErr: "Error in fetching coreSerives section" })
         }
         catch (err) {
             this.setState({ heroErr: err })
         }
     }
+    getSlides = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/testimonial`)
+            const result = await response.json()
+            result.success ? this.setState({ testimonials: result.result }) : this.setState({ testimonialErr: "Error in fetching testimonial section" })
+        }
+        catch (err) {
+            this.setState({ testimonialErr: err })
+        }
+    }
+    getPromises = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/home/promise')
+            const result = await response.json()
+            result.success ? this.setState({ promises: result.result }) : this.setState({ promisesErr: "Error in fetching promises section" })
+            console.log(this.state.promises)
+        }
+        catch (err) {
+            this.setState({ promisesErr: err.message })
+        }
+    }
     componentDidMount() {
         this.getServices();
         this.getHero();
-       
+        this.getSlides();
+        this.getPromises();
     }
     render() {
         return (
             <>
-
                 {this.state.hero.map((item, index) => {
                     return <Hero key={index} name={item.name} image={item.image} slogan={item.slogan} btn={item.btn} />
                 })}
-
-
                 <section class="services_section">
                     <h1>Our Core Services</h1>
                     <article>
@@ -59,8 +81,8 @@ export default class Home extends Component {
 
                     <section class="services">
                         {this.state.services.map((item, index) => {
-                            const {title , description , image} = item
-                            return <Service key={index} title={title}  description={description} image={image}/>
+                            const { title, description, image } = item
+                            return <Service key={index} title={title} description={description} image={image} />
                         })}
                     </section>
                 </section>
@@ -69,7 +91,7 @@ export default class Home extends Component {
                 <section>
                     <h1>Testimonials</h1>
                     <div class="mySlides">
-                        <Slider />
+                        <Slider slides={this.state.testimonials} />
                     </div>
                 </section>
 
@@ -79,7 +101,10 @@ export default class Home extends Component {
                         As part of our high quality service, we'd like to offer something extra too.
                     </article>
                     <section class="promises">
-                        <Promise /><Promise /><Promise /><Promise /><Promise /><Promise />
+                        {this.state.promises.map((item, index) => {
+                            const { title, description } = item
+                            return <Promise key={index} title={title} description={description} />
+                        })}
                     </section>
 
                     <NotOterComp />
