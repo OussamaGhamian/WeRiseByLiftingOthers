@@ -209,7 +209,6 @@ const initializeDatabase = async () => {
     }
   };
   const addMember = async props => {
-    // console.log(props)
     let { name, position, description, image } = props;
     if (!props || !name || !position || !description || !image)
       throw new Error(
@@ -217,9 +216,8 @@ const initializeDatabase = async () => {
       );
     try {
       const result = await db.run(
-        `insert into ourTeam (name , position ,description , image) values ('${name}','${position}','${description}','${image}') `
+        `insert into ourTeam (name , position ,description , image) values ('${name}',"${position}","${description}",'${image}') `
       );
-      console.log(result.stmt.lastID);
       return result.stmt.lastID;
     } catch (err) {
       throw new Error(`this combination does not work`);

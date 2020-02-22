@@ -3,9 +3,30 @@ import { MDBRow, MDBCardBody } from "mdbreact";
 import Avatar from '../../Components/Avatar'
 import "./OurTeam.css"
 export default class Ourteam extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            members: [],
+            err: "",
+        }
+    }
+    getMembers = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/ourTeam')
+            const result = await response.json()
+            console.log(result.message)
+            result.success ? this.setState({ members: result.result }) : this.setState({ err: result.message })
+        }
+        catch (err) {   
+            this.setState({ err })
+        }
+    }
+    componentDidMount() {
+        this.getMembers()
+    }
     render() {
         return (
-            
+
             <MDBCardBody >
                 <h2 className="h1-responsive font-weight-bold my-5">
                     Our amazing team
@@ -16,7 +37,14 @@ export default class Ourteam extends React.Component {
                     totam voluptas nostrum quisquam eum porro a pariatur veniam.
               </p>
                 <MDBRow>
-                    <Avatar /> <Avatar /> <Avatar /> <Avatar /> <Avatar /> <Avatar /><Avatar /> <Avatar />
+
+                    {this.state.members.map((member, index) => {
+                        return <Avatar
+                            name={member.name}
+                            position={member.position}
+                            description={member.description}
+                            image={member.image} />
+                    })}
                 </MDBRow>
             </MDBCardBody>
         );

@@ -144,7 +144,7 @@ const start = async () => {
       next(err)
     }
   })
-  app.post(`/ourTeam/`, upload, async (req, res, next) => {
+  app.post(`/ourTeam`, upload, async (req, res, next) => {
     const { name, position, description } = req.body
     const image = req.file.path
     try {

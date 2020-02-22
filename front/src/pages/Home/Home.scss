@@ -46,6 +46,9 @@
   .service article {
     align-self: center;
   }
+  .service img{
+    max-width: 250px;
+  }
   .service img :hover{
     display: none ;
     transition: all 2s;

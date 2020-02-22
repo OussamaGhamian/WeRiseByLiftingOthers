@@ -3,13 +3,52 @@ import './Home.scss'
 import Hero from '../../Components/Hero/Hero'
 import Service from '../../Components/Service'
 import Slider from '../../Components/Slider'
-import Promise from'../../Components/Promise'
+import Promise from '../../Components/Promise'
 import NotOterComp from '../../Components/Noc'
 export default class Home extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            hero: [],
+            heroErr: "",
+            services: [],
+            servicesErr: "",
+        }
+    }
+    getHero = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/home/hero')
+            const result = await response.json()
+            result.success ? this.setState({ hero: result.result }) : this.setState({ heroErr: "Error in fetching hero section" })
+        }
+        catch (err) {
+            this.setState({ heroErr: err })
+        }
+    }
+    getServices = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/core')
+            const result = await response.json()
+            console.log(result.result)
+            result.success ? this.setState({ services: result.result }) : this.setState({ heroErr: "Error in fetching coreSerives section" })
+        }
+        catch (err) {
+            this.setState({ heroErr: err })
+        }
+    }
+    componentDidMount() {
+        this.getServices();
+        this.getHero();
+       
+    }
     render() {
         return (
             <>
-                <Hero />
+
+                {this.state.hero.map((item, index) => {
+                    return <Hero key={index} name={item.name} image={item.image} slogan={item.slogan} btn={item.btn} />
+                })}
+
 
                 <section class="services_section">
                     <h1>Our Core Services</h1>
@@ -19,7 +58,10 @@ export default class Home extends Component {
                     </article>
 
                     <section class="services">
-                        <Service /><Service /><Service /><Service /><Service /><Service />
+                        {this.state.services.map((item, index) => {
+                            const {title , description , image} = item
+                            return <Service key={index} title={title}  description={description} image={image}/>
+                        })}
                     </section>
                 </section>
 
