@@ -1,5 +1,21 @@
 import app from "./app";
 import initializeDatabase from "./db";
+import multer from 'multer'
+//config storage for multer = detailed wau to how you want to store your file.
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads/')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  },
+})
+const fileFilter = (req, file, cb) => {
+  file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' ? cb(null, true) : cb(new Error(`file not supported`), false)
+}
+//multer config
+const upload = multer({ storage, fileFilter }).single('image')
+
 const start = async () => {
   const controller = await initializeDatabase();
   //  this start code for faqs
@@ -14,7 +30,6 @@ const start = async () => {
   });
   app.post("/faq/", async (req, res, next) => {
     const { question, answer } = req.body;
-
     try {
       const result = await controller.createFaq({ question, answer });
       res.json({ success: true, result });
@@ -22,7 +37,6 @@ const start = async () => {
       next(err);
     }
   });
-
   app.get("/faq/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -32,7 +46,6 @@ const start = async () => {
       next(err);
     }
   });
-
   app.delete("/faq/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -42,12 +55,9 @@ const start = async () => {
       next(err);
     }
   });
-
   app.put("/faq/:id", async (req, res, next) => {
     const { id } = req.params;
-    console.log(req.body)
     const { question, answer } = req.body;
-
     try {
       const result = await controller.updateFaq(id, { question, answer });
       res.json({ success: true, result });
@@ -66,8 +76,9 @@ const start = async () => {
       next(err);
     }
   });
-  app.post("/service", async (req, res, next) => {
-    const { title, description, image } = req.body;
+  app.post("/service", upload, async (req, res, next) => {
+    const { title, description } = req.body;
+    const image = req.file.path
     try {
       const result = await controller.createService({
         title,
@@ -97,9 +108,10 @@ const start = async () => {
       next(err);
     }
   });
-  app.put("/service/:id", async (req, res, next) => {
+  app.put("/service/:id", upload, async (req, res, next) => {
     const { id } = req.params;
-    const { title, description, image } = req.body;
+    const { title, description } = req.body;
+    const image = req.file.path
     try {
       const result = await controller.updateService(id, {
         title,
@@ -112,22 +124,17 @@ const start = async () => {
     }
   });
   //   this end code for services
-
-
-
   // here our team code starts
   app.get(`/ourTeam`, async (req, res, next) => {
     try {
       const result = await controller.getMembers()
-      console.log(result)
       res.json({ success: true, result })
     }
     catch (err) {
       next(err)
     }
   })
-
-  app.get(`/ourTeam/delete/:id`, async (req, res, next) => {
+  app.delete(`/ourTeam/:id`, async (req, res, next) => {
     const { id } = req.params
     try {
       const result = await controller.deleteMember(id)
@@ -137,8 +144,9 @@ const start = async () => {
       next(err)
     }
   })
-  app.get(`/outTeam/create`, async (req, res, next) => {
-    const { name, position, description, image } = req.query
+  app.post(`/ourTeam/`, upload, async (req, res, next) => {
+    const { name, position, description } = req.body
+    const image = req.file.path
     try {
       const result = await controller.addMember({ name, position, description, image })
       res.json({ success: true, result })
@@ -147,9 +155,10 @@ const start = async () => {
       next(err)
     }
   })
-  app.get(`/ourTeam/update/:id`, async (req, res, next) => {
+  app.put(`/ourTeam/:id`, upload, async (req, res, next) => {
     const { id } = req.params
-    const { name, position, description, image } = req.query
+    const { name, position, description } = req.body
+    const image = req.file.path
     try {
       const result = await controller.updateMember(id, { name, position, description, image })
       res.json({ success: true, result })
@@ -168,8 +177,9 @@ const start = async () => {
   })
   // here our team code ends
   // here Hero code starts
-  app.get(`/home/hero/update`, async (req, res, next) => {
-    const { name, image, slogan, btn } = req.query
+  app.put(`/home/hero`, upload, async (req, res, next) => {
+    const { name, slogan, btn } = req.body
+    const image = req.file.path
     try {
       const result = await controller.updateHero(name, image, slogan, btn)
       res.json({ success: true, result })
@@ -178,11 +188,10 @@ const start = async () => {
       next(err)
     }
   })
-  app.get(`/home/hero/delete`, async (req, res, next) => {
+  app.delete(`/home/hero`, async (req, res, next) => {
 
     try {
       const result = await controller.deleteHero()
-      console.log(result)
       res.json({ success: true, result })
     }
     catch (err) {
@@ -192,7 +201,7 @@ const start = async () => {
 
   app.get(`/home/hero`, async (req, res, next) => {
     try {
-      const result = await controller.getHero(1)
+      const result = await controller.getHero(2)
       res.json({ success: true, result })
     }
     catch (err) {
@@ -261,19 +270,15 @@ const start = async () => {
       next(err);
     }
   });
-
-
-  app.get("/HowItWorks/create", async (req, res, next) => {
-    const { title, description, date } = req.query;
+  app.post("/HowItWorks", async (req, res, next) => {
+    const { title, description, date } = req.body;
     try {
       const result = await controller.createHowItWorks({ title, description, date });
-      console.log(result)
       res.json({ success: true, result });
     } catch (err) {
       next(err);
     }
   });
-
   app.get("/HowItWorks/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -283,9 +288,7 @@ const start = async () => {
       next(err);
     }
   });
-
-
-  app.get("/getHowItWorks/delete/:id", async (req, res, next) => {
+  app.delete("/HowItWorks/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
       const result = await controller.deletegetHowItWorks(id);
@@ -295,9 +298,9 @@ const start = async () => {
     }
   });
 
-  app.get("/HowItWorks/update/:id", async (req, res, next) => {
+  app.put("/HowItWorks/:id", async (req, res, next) => {
     const { id } = req.params;
-    const { title, description, date } = req.query;
+    const { title, description, date } = req.body;
     try {
       const result = await controller.updateHowItWorks(id, { title, description, date });
       res.json({ success: true, result });
@@ -305,9 +308,7 @@ const start = async () => {
       next(err);
     }
   });
-
   //   this end code for HowItWorks
-
   //  this start code for ContactUs
   app.get("/ContactUs", async (req, res, next) => {
     try {
@@ -322,13 +323,11 @@ const start = async () => {
     const { fname, lname, message } = req.body;
     try {
       const result = await controller.createContactUs({ fname, lname, message });
-      console.log(result)
       res.json({ success: true, result });
     } catch (err) {
       next(err);
     }
   });
-
   app.get("/ContactUs/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -338,8 +337,6 @@ const start = async () => {
       next(err);
     }
   });
-
-
   app.delete("/ContactUs/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -362,7 +359,6 @@ const start = async () => {
   // });
 
   // This Start Code For Portfoio
-
   app.delete("/portfolio/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -372,11 +368,10 @@ const start = async () => {
       next(err);
     }
   });
-
-  app.put("/portfolio/:id", async (req, res, next) => {
+  app.put("/portfolio/:id", upload, async (req, res, next) => {
     const { id } = req.params;
-    const { title, description, image, url } = req.body;
-
+    const { title, description, url } = req.body;
+    const image = req.file.path
     try {
       const result = await controller.updatePortfolio(id, { title, description, image, url });
       res.json({ success: true, result });
@@ -384,9 +379,9 @@ const start = async () => {
       next(err);
     }
   });
-  app.post("/portfolio", async (req, res, next) => {
-    const { title, description, image, url } = req.body;
-    console.log(title, description, image)
+  app.post("/portfolio", upload, async (req, res, next) => {
+    const { title, description, url } = req.body;
+    const image = req.file.path
     try {
       const result = await controller.createPortfolio({ title, description, image, url });
       res.json({ success: true, result });
@@ -394,7 +389,6 @@ const start = async () => {
       next(err);
     }
   });
-
   app.get("/portfolio/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -413,11 +407,7 @@ const start = async () => {
       next(err);
     }
   });
-
-
   // This End Code For Portfoio
-
-
   // This Start Code For Core 
   app.get("/core", async (req, res, next) => {
     const { orderBy } = req.query;
@@ -428,10 +418,9 @@ const start = async () => {
       next(err);
     }
   });
-
-  app.get("/core/create", async (req, res, next) => {
-    const { title, description, image } = req.query;
-
+  app.post("/core", upload, async (req, res, next) => {
+    const { title, description } = req.body;
+    const image = req.file.path
     try {
       const result = await controller.createCore({ title, description, image });
       res.json({ success: true, result });
@@ -439,7 +428,6 @@ const start = async () => {
       next(err);
     }
   });
-
   app.get("/core/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -449,9 +437,7 @@ const start = async () => {
       next(err);
     }
   });
-
-
-  app.get("/core/delete/:id", async (req, res, next) => {
+  app.delete("/core/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
       const result = await controller.deleteCore(id);
@@ -460,11 +446,10 @@ const start = async () => {
       next(err);
     }
   });
-
-  app.get("/core/update/:id", async (req, res, next) => {
+  app.put("/core/:id", upload, async (req, res, next) => {
     const { id } = req.params;
-    const { title, description, image } = req.query;
-
+    const { title, description } = req.body;
+    const image = req.file.path
     try {
       const result = await controller.updateCore(id, { title, description, image });
       res.json({ success: true, result });
@@ -473,7 +458,6 @@ const start = async () => {
     }
   });
   // This End For Core
-
   // This Start Testimonial
   app.get("/testimonial", async (req, res, next) => {
     const { orderBy } = req.query;
@@ -484,10 +468,9 @@ const start = async () => {
       next(err);
     }
   });
-
-  app.get("/testimonial/create", async (req, res, next) => {
-    const { name, recommendation, image } = req.query;
-
+  app.post("/testimonial", upload, async (req, res, next) => {
+    const { name, recommendation } = req.body;
+    const image = req.file.path
     try {
       const result = await controller.createTestimonial({ name, recommendation, image });
       res.json({ success: true, result });
@@ -495,7 +478,6 @@ const start = async () => {
       next(err);
     }
   });
-
   app.get("/testimonial/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -505,9 +487,7 @@ const start = async () => {
       next(err);
     }
   });
-
-
-  app.get("/testimonial/delete/:id", async (req, res, next) => {
+  app.delete("/testimonial/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
       const result = await controller.deleteTestimonial(id);
@@ -516,11 +496,10 @@ const start = async () => {
       next(err);
     }
   });
-
-  app.get("/testimonial/update/:id", async (req, res, next) => {
+  app.put("/testimonial/:id", upload, async (req, res, next) => {
     const { id } = req.params;
-    const { name, recommendation, image } = req.query;
-
+    const { name, recommendation} = req.body;
+    const image = req.file.path
     try {
       const result = await controller.updateTestimonial(id, { name, recommendation, image });
       res.json({ success: true, result });
@@ -529,7 +508,6 @@ const start = async () => {
     }
   });
   // This End For Testimonial
-
   app.use((err, req, res, next) => {
     res.status(500).json({ success: false, message: err.message });
   });
