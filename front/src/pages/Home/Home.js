@@ -5,6 +5,7 @@ import Service from '../../Components/Service'
 import Slider from '../../Components/Slider'
 import Promise from '../../Components/Promise'
 import NotOterComp from '../../Components/Noc'
+import {Spring} from 'react-spring/renderprops'
 export default class Home extends Component {
     constructor(props) {
         super(props)
@@ -93,47 +94,59 @@ export default class Home extends Component {
     }
     render() {
         return (
-            <>
-                {this.state.hero.map((item, index) => {
-                    return <Hero key={index} name={item.name} image={item.image} slogan={item.slogan} btn={item.btn} />
-                })}
-                <section class="services_section">
-                    <h1>Our Core Services</h1>
-                    <article>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, placeat quasi quia
-                        explicabo aut voluptatum accusamus adipisci perferendis
+            <Spring
+                from={{ opacity: 0, marginTop: -2000 }}
+                to={{ opacity: 1, marginTop: 0 }}
+                config={{ duration: 1000 }}
+            >
+                {
+                    props =>
+                        <div style={props}>
+                            <>
+                                {this.state.hero.map((item, index) => {
+                                    return <Hero key={index} name={item.name} image={item.image} slogan={item.slogan} btn={item.btn} />
+                                })}
+                                <section class="services_section">
+                                    <h1>Our Core Services</h1>
+                                    <article>
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, placeat quasi quia
+                                        explicabo aut voluptatum accusamus adipisci perferendis
                     </article>
 
-                    <section class="services">
-                        {this.state.services.map((item, index) => {
-                            const { title, description, image } = item
-                            return <Service key={index} title={title} description={description} image={image} />
-                        })}
-                    </section>
-                </section>
+                                    <section class="services">
+                                        {this.state.services.map((item, index) => {
+                                            const { title, description, image } = item
+                                            return <Service key={index} title={title} description={description} image={image} />
+                                        })}
+                                    </section>
+                                </section>
 
 
-                <section>
-                    <h1>Testimonials</h1>
-                    <div class="mySlides">
-                        <Slider slides={this.state.testimonials} />
-                    </div>
-                </section>
+                                <section>
+                                    <h1>Testimonials</h1>
+                                    <div class="mySlides">
+                                        <Slider slides={this.state.testimonials} />
+                                    </div>
+                                </section>
 
-                <section class="promises_section">
-                    <h1>Our promise</h1>
-                    <article>
-                        As part of our high quality service, we'd like to offer something extra too.
+                                <section class="promises_section">
+                                    <h1>Our promise</h1>
+                                    <article>
+                                        As part of our high quality service, we'd like to offer something extra too.
                     </article>
-                    <section class="promises">
-                        {this.state.promises.map((item, index) => {
-                            const { title, description } = item
-                            return <Promise key={index} title={title} description={description} />
-                        })}
-                    </section>
-                    <NotOterComp noc={this.state.nocs} exp={this.state.experiences} />
-                </section>
-            </>
+                                    <section class="promises">
+                                        {this.state.promises.map((item, index) => {
+                                            const { title, description } = item
+                                            return <Promise key={index} title={title} description={description} />
+                                        })}
+                                    </section>
+                                    <NotOterComp noc={this.state.nocs} exp={this.state.experiences} />
+                                </section>
+                            </>
+                        </div>
+                }
+            </Spring>
+
         )
     }
 }
