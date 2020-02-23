@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-export default class Datum extends Component {
-    render() {
-        return (
-            <sections class="datum">
-                <p id="nmbr">12</p>
-                <p>YEARS OF EXPERIENCE</p>
-            </sections>
-        )
-    }
+export default function Datum(props) {
+
+    return (
+        <sections class="datum">
+            <p id="nmbr">{props.data.yearsNbr}</p>
+            <p>{props.data.field}</p>
+        </sections>
+    )
 }

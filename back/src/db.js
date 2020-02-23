@@ -853,8 +853,109 @@ const initializeDatabase = async () => {
     }
   };
   // This End Testimonial
-
-
+  //Here notOtherCompany startS
+  const getNoc = async () => {
+    try {
+      const result = await db.all(`select * from noc where id = 1`);
+      if (result.length == 0) throw new Error(`No Noc to retreive.`);
+      return result;
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+  const deleteNoc = async () => {
+    try {
+      const result = await db.run(
+        `update noc set title = '' , description = '' , miniHeader = '' , image = '' where id = 1 `
+      );
+      if (result.stmt.changes == 0)
+        throw new Error(`Member with ID 1 does not exist.`);
+      return true;
+    } catch (err) {
+      throw new Error(`could not delete Not other company section. ${err}`);
+    }
+  };
+  const updateNoc = async (title, description, miniHeader, image) => {
+    try {
+      const result = await db.run(
+        `update noc set title = '${title}' , description = '${description}' , miniHeader = '${miniHeader}' , image = '${image}' where id = 1`
+      );
+      if (result.stmt.changes == 0)
+        throw new Error(`Could not be able to update NotOtherCompany`);
+      return true;
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+  //Here notOtherCompany ends 
+  //Here experience starts 
+  const getExperiences = async () => {
+    try {
+      const rows = await db.all(`SELECT * FROM experience`);
+      if (rows.length == 0) {
+        throw new Error("experience table is empty!");
+      }
+      return rows;
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+  const createExperience = async (yearsNbr, field) => {
+    if (!yearsNbr || !field) {
+      throw new Error(`You must provide a field and yearsNbr `);
+    }
+    try {
+      const result = await db.run(
+        `Insert into experience (yearsNbr, field) values ('${yearsNbr}', '${field}')`
+      );
+      return result.stmt.lastID;
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+  const getExperienceByID = async id => {
+    try {
+      const rows = await db.all(
+        `SELECT  * FROM experience where id=${id}`
+      );
+      if (rows.length == 0) {
+        throw new Error(`experience with id ${id} is not found`);
+      }
+      return rows;
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+  const deleteExperience = async id => {
+    try {
+      const result = await db.run(`Delete from experience where id = ${id}`);
+      if (result.stmt.changes == 0) {
+        throw new Error(`experience with id ${id} doesnt exist`);
+      }
+      return true;
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+  const updateExperience = async (id, yearsNbr, field) => {
+    let stmt = "";
+    if (id && yearsNbr && field) {
+      stmt = `update experience set yearsNbr = '${yearsNbr}', field= '${field}' where id = ${id} `;
+    } else if (id && yearsNbr && !field) {
+      stmt = `update experience set yearsNbr = '${yearsNbr}' where id = ${id} `;
+    } else if (id && !yearsNbr && field) {
+      stmt = `update experience set field = '${field}' where id = ${id} `;
+    } else {
+      throw new Error(`You must provide yearsNbr or a field`);
+    }
+    try {
+      const result = await db.run(stmt);
+      return true;
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+  //Here experience ends 
   const controller = {
     ///Faq
     getFaqs,
@@ -914,6 +1015,16 @@ const initializeDatabase = async () => {
     createTestimonial,
     deleteTestimonial,
     updateTestimonial,
+    //Noc
+    getNoc,
+    deleteNoc,
+    updateNoc,
+    //experience
+    getExperiences,
+    getExperienceByID,
+    updateExperience,
+    createExperience,
+    deleteExperience,
   };
 
   return controller;

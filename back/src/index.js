@@ -198,7 +198,6 @@ const start = async () => {
       next(err)
     }
   })
-
   app.get(`/home/hero`, async (req, res, next) => {
     try {
       const result = await controller.getHero(2)
@@ -509,10 +508,88 @@ const start = async () => {
     }
   });
   // This End For Testimonial
+  //Start of Not other company section
+  app.get(`/notOtherCompany`, async (req, res, next) => {
+    try {
+      const result = await controller.getNoc()
+      res.json({ success: true, result })
+    }
+    catch (err) {
+      next(err)
+    }
+  })
+  app.put(`/notOtherCompany`, upload, async (req, res, next) => {
+    const { title, description, miniHeader } = req.body
+    const image = req.file.path
+    try {
+      const result = await controller.updateNoc(title, description, miniHeader, image)
+      res.json({ success: true, result })
+    }
+    catch (err) {
+      next(err)
+    }
+  })
+  app.delete(`/notOtherCompany`, async (req, res, next) => {
+
+    try {
+      const result = await controller.deleteNoc()
+      res.json({ success: true, result })
+    }
+    catch (err) {
+      next(err)
+    }
+  })
+  //End of Not other company section
+  //Starting of experience section
+  app.get("/experience", async (req, res, next) => {
+    try {
+      const result = await controller.getExperiences();
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+  app.post("/experience", async (req, res, next) => {
+    const { yearsNbr, field } = req.body;
+    try {
+      const result = await controller.createExperience(yearsNbr, field);
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+  app.get("/experience/:id", async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const result = await controller.getExperienceByID(id);
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+  app.delete("/experience/:id", async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const result = await controller.deleteExperience(id);
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+  app.put("/experience/:id", async (req, res, next) => {
+    const { id } = req.params;
+    const { yearsNbr, field } = req.body;
+    try {
+      const result = await controller.updateExperience(id, yearsNbr, field);
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  });
+  //Ending of experience section
   app.use((err, req, res, next) => {
     res.status(500).json({ success: false, message: err.message });
   });
-
   app.listen(8080, () => {
     console.log("Listening on port 8080");
   });

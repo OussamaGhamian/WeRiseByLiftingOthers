@@ -17,6 +17,10 @@ export default class Home extends Component {
             testimonialErr: "",
             promises: [],
             promisesErr: "",
+            nocs: [],
+            nocErr: "",
+            experiences: [],
+            experienceErr: ''
         }
     }
     getHero = async () => {
@@ -54,10 +58,29 @@ export default class Home extends Component {
             const response = await fetch('http://localhost:8080/home/promise')
             const result = await response.json()
             result.success ? this.setState({ promises: result.result }) : this.setState({ promisesErr: "Error in fetching promises section" })
-            console.log(this.state.promises)
         }
         catch (err) {
-            this.setState({ promisesErr: err.message })
+            this.setState({ promisesErr: err })
+        }
+    }
+    getNoc = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/notOtherCompany`)
+            const result = await response.json()
+            result.success ? this.setState({ nocs: result.result }) : this.setState({ nocErr: "Error in fetching notOtherCompany section" })
+        }
+        catch (err) {
+            this.setState({ nocErr: err })
+        }
+    }
+    getExperience = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/experience`)
+            const result = await response.json()
+            result.success ? this.setState({ experiences: result.result }) : this.setState({ experienceErr: "Error in fetching notOtherCompany section" })
+        }
+        catch (err) {
+            this.setState({ experienceErr: err })
         }
     }
     componentDidMount() {
@@ -65,6 +88,8 @@ export default class Home extends Component {
         this.getHero();
         this.getSlides();
         this.getPromises();
+        this.getNoc();
+        this.getExperience();
     }
     render() {
         return (
@@ -106,8 +131,7 @@ export default class Home extends Component {
                             return <Promise key={index} title={title} description={description} />
                         })}
                     </section>
-
-                    <NotOterComp />
+                    <NotOterComp noc={this.state.nocs} exp={this.state.experiences} />
                 </section>
             </>
         )
