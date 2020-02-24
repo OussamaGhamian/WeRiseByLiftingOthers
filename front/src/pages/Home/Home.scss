@@ -55,10 +55,9 @@
   .service img{
     max-width: 250px;
   }
-  .service img :hover{
-    display: none ;
-    transition: all 2s;
-    transform: scale(1.2 deg);
+  .service img:hover{
+    transition: all .5s;
+    transform: scale(1.2 );
   }
   /*mediaQurey for services section */
   @media screen and (max-width: 650px) {

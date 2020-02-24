@@ -30,7 +30,7 @@ class Services extends Component {
       <Spring
         from={{ opacity: 0, marginTop: -2000 }}
         to={{ opacity: 1, marginTop: 0 }}
-        config={{ duration: 1000 }}
+        config={{ duration: 1500 }}
       >
         {
           props =>
