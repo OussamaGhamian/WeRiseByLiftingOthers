@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Datum from './Datum'
 export default function Noc(props) {
     return (

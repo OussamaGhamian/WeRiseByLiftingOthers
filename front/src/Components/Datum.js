@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 export default function Datum(props) {
 
     return (
-        <sections class="datum">
+        <section class="datum">
             <p id="nmbr">{props.data.yearsNbr}</p>
             <p>{props.data.field}</p>
-        </sections>
+        </section>
     )
 }
