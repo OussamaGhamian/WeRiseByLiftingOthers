@@ -7,10 +7,7 @@ import image1 from '../../images/download.png'
 import DataImage from "../DataPortfolio/DataPortfolio"
 
 export default class Portfolio extends Component {
-
- 
-    
-    render() {
+render() {
         return (
             <div className="App">
                 <div>
