@@ -1,6 +1,6 @@
 
 import React from 'react';
-import pic1 from '../../images/pic1.jpg';
+
 
 
 function Card ({card,index}) {
@@ -8,8 +8,8 @@ function Card ({card,index}) {
 	return (
   
         <div className="containar" key={index}>
-        <img className="card-image"  src={pic1} alt="" />
-        {/* src={`http://localhost:3001/${card.image}.jpg`} */ }
+        <img className="card-image"  src={`http://localhost:8080/${card.image}`  } alt="" />
+       
         <div className="card1">
           <div className="card-title">
             {card.title}
