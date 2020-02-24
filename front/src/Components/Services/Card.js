@@ -1,9 +1,6 @@
 import React from "react";
 
 function Card({ card, index }) {
-  {
-    console.log(card);
-  }
   return (
     <div className="containar" key={index}>
       <img
