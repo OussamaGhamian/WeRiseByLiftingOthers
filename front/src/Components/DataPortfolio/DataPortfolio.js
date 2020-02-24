@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
-
-import { render } from '@testing-library/react';
 import image1 from '../../images/download.png';
-
 export default class dataImage extends Component {
     render() {
-
         return (
             <div className="App">
 

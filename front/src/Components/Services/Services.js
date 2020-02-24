@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import "./Services.css";
-
+import { Spring } from 'react-spring/renderprops'
 class Services extends Component {
   constructor(props) {
     super(props);
@@ -24,21 +24,27 @@ class Services extends Component {
 
   async componentDidMount() {
     this.getServices();
-    this.showCards()
   }
-
-  showCards = () => console.log(this.state.cards);
-
   render() {
     return (
-      <div className="App">
-        <div className="cards">
-          {this.showCards()}
-          {this.state.cards.map((card, i) => (
-            <Card card={card} index={i} />
-          ))}
-        </div>
-      </div>
+      <Spring
+        from={{ opacity: 0, marginTop: -2000 }}
+        to={{ opacity: 1, marginTop: 0 }}
+        config={{ duration: 1500 }}
+      >
+        {
+          props =>
+            <div style={props}>
+              <div className="App">
+                <div className="cards">
+                  {this.state.cards.map((card, i) => (
+                    <Card card={card} index={i} />
+                  ))}
+                </div>
+              </div>
+            </div>
+        }
+      </Spring>
     );
   }
 }

@@ -1,8 +1,7 @@
 import React from 'react'
 import * as ReactBootstrap from 'react-bootstrap'
 import Slide from './Slide'
-export default function Slider() {
-
+export default function Slider(props) {
     const [index, setIndex] = React.useState(0);
     const [direction, setDirection] = React.useState(null);
 
@@ -13,15 +12,11 @@ export default function Slider() {
 
     return (
         <ReactBootstrap.Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
-            <ReactBootstrap.Carousel.Item>
-                <Slide />
-            </ReactBootstrap.Carousel.Item>
-            <ReactBootstrap.Carousel.Item>
-                <Slide />
-            </ReactBootstrap.Carousel.Item>
-            <ReactBootstrap.Carousel.Item>
-                <Slide />
-            </ReactBootstrap.Carousel.Item>
+            {props.slides.map((item, index) => {
+                return (<ReactBootstrap.Carousel.Item key={index}>
+                    <Slide slide={item} />
+                </ReactBootstrap.Carousel.Item>)
+            })}
         </ReactBootstrap.Carousel>
     );
 
