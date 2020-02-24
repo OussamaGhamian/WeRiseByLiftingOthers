@@ -17,7 +17,6 @@ class Faqs extends Component {
     try {
       const response = await fetch("http://localhost:8080/faqs");
       const result = await response.json();
-      console.log(result)
       if (result.success) {
         this.setState({ faqs: result.result, error: "" });
       } else {
@@ -39,7 +38,7 @@ class Faqs extends Component {
     });
     this.setState({
       faqs: newFaqs
-    })
+    });
   };
 
   async componentDidMount() {

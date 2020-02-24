@@ -4,8 +4,9 @@ import image1 from '../../images/download.png'
 import DataImage from "../DataPortfolio/DataPortfolio"
 import {Spring} from 'react-spring/renderprops'
 export default class Portfolio extends Component {
+
     render() {
-        return (
+return (
             <Spring
                 from={{ opacity: 0, marginTop: -1000 }}
                 to={{ opacity: 1, marginTop: 0 }}
