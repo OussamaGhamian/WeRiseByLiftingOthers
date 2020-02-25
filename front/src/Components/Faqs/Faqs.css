@@ -1,8 +1,14 @@
 .faqs {
   width: 80%;
-
   margin: 0 auto;
   padding: 15px;
+}
+
+.freq h2 {
+  font-weight: 800;
+  text-align: center;
+  color: #0000ff;
+  margin: 48px 0px;
 }
 
 .faqs .faq {
@@ -18,7 +24,6 @@
   position: relative;
   font-size: 20px;
   padding-right: 80px;
-
   transition: all 0.4s ease;
 }
 
@@ -30,12 +35,10 @@
   transform: translateY(-50%);
   width: 30px;
   height: 30px;
-
   background-image: url("../../images/arrow-right.svg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-
   transition: all 0.4s ease-out;
 }
 
@@ -61,9 +64,9 @@
   max-height: 1000px;
   opacity: 1;
 }
+
 @media screen and (max-width: 767px) {
-  .faqs .faq .faq-question,
-  .faqs .faq .faq-answe {
+  .faqs .faq .faq-question, .faqs .faq .faq-answe {
     margin: 5px;
     padding: 5px;
     font-size: 15px;
@@ -74,7 +77,6 @@
   }
   .faqs .faq .faq-question::after {
     right: -5px;
-
     width: 15px;
     height: 15px;
   }

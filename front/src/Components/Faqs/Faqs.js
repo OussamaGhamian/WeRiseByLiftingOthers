@@ -47,7 +47,8 @@ class Faqs extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="freq">
+        <h2>Frequent Asked Questions</h2>
         <div className="faqs">
           {this.state.faqs.map((faq, i) => (
             <Faq faq={faq} index={i} toggleFAQ={this.toggleFAQ} />

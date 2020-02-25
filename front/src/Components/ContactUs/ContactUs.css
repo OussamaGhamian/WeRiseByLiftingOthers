@@ -11,9 +11,11 @@
 }
 
 .ContactUs h2 {
+    font-weight: 700;
     text-align: center;
-    color: blue;
-}
+    color: #0000ff;
+    margin : 48px 0px; 
+  }
 
 .ContactUs .three {
     display: flex;

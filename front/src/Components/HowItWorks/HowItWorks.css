@@ -8,7 +8,12 @@
   box-sizing: border-box;
   width: 80%;
 }
-
+.HowItWorks h2 {
+  font-weight: 800;
+  text-align: center;
+  color: #0000ff;
+  margin : 48px 0px; 
+}
 .HowItWorks .timeline ul {
   padding: 0;
   margin: 0;

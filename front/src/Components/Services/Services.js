@@ -33,7 +33,8 @@ class Services extends Component {
       >
         {props => (
           <div style={props}>
-            <div className="App">
+            <div className="ser">
+              <h2> Our Services</h2>
               <div className="cards">
                 {this.state.cards.map((card, i) => (
                   <Card card={card} index={i} />

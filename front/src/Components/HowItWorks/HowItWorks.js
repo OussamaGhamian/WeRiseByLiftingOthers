@@ -40,6 +40,7 @@ export default class HowItWorks extends Component {
                     props =>
                         <div style={props}>
                             <div className="HowItWorks" >
+                                <h2>Milestone</h2>
                                 <div className="timeline">
                                     <ul>
                                         {this.state.HowItWorks.map((element, index) => {
