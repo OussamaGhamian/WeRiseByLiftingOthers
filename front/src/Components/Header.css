@@ -1,5 +1,6 @@
 .topBotomBordersOut a {
  position: relative;
+ outline: none;
 }
 
 .topBotomBordersOut a:before, .topBotomBordersOut a:after {
