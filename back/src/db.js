@@ -65,8 +65,7 @@ const initializeDatabase = async () => {
       throw new Error(err);
     }
   };
-  const updateFaq = async (id, props) => {
-    const { question, answer } = props;
+  const updateFaq = async (id, question, answer) => {
     let stmt = "";
     if (question && answer) {
       stmt = `update faq set question = '${question}', answer= '${answer}' where id = ${id} `;

@@ -27,6 +27,7 @@ export default class Header extends Component {
                                         <ReactBootstrap.Nav.Link className=" topBotomBordersOut"><Link to={'/Faq'} className="nav-link">FAQ</Link> </ReactBootstrap.Nav.Link>
                                         <ReactBootstrap.Nav.Link className=" topBotomBordersOut"><Link to={'/OurTeam'} className="nav-link">Our Team</Link> </ReactBootstrap.Nav.Link>
                                         <ReactBootstrap.Nav.Link className=" topBotomBordersOut" ><Link to={'/ContactUs'} className="nav-link">Contact US</Link> </ReactBootstrap.Nav.Link>
+                                        {/* <ReactBootstrap.Nav.Link className=" topBotomBordersOut" ><Link to={'/Admins'} className="nav-link">Admin</Link> </ReactBootstrap.Nav.Link> */}
                                     </ReactBootstrap.Nav>
                                 </ReactBootstrap.Navbar.Collapse>
                             </ReactBootstrap.Navbar>

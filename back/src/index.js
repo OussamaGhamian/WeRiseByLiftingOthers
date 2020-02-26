@@ -56,10 +56,11 @@ const start = async () => {
     }
   });
   app.put("/faq/:id", async (req, res, next) => {
+    console.log('body', req.body)
     const { id } = req.params;
     const { question, answer } = req.body;
     try {
-      const result = await controller.updateFaq(id, { question, answer });
+      const result = await controller.updateFaq(id, question, answer );
       res.json({ success: true, result });
     } catch (err) {
       next(err);
