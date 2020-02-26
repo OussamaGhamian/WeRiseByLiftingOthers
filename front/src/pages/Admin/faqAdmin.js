@@ -50,7 +50,7 @@ export default class admin extends Component {
     }
   }
 
-  faqupdate = async (e) => {
+  faqUpdate = async (e) => {
     const question = prompt("New value of question:")
     const answer = prompt("New value of answer:")
     const id = e.target.id
@@ -69,6 +69,7 @@ export default class admin extends Component {
         body: JSON.stringify({ question, answer })
       })
       const result = await response.json();
+      if(result.success)window.location.reload()
     }
     catch (err) { this.setState({ err }) }
 
@@ -118,7 +119,7 @@ export default class admin extends Component {
             <tr><th>#</th><th>question</th><th>answer</th> <th></th><th></th></tr>
             {this.state.faqs.map((item, index) => {
               return <tr>
-                <td>{item.id}</td><td>{item.question}</td><td>{item.answer}</td><td><Button id={item.id} onClick={this.faqupdate}>Edit</Button></td><td><Button id={item.id} onClick={this.faqDelete}>Delete</Button></td>
+                <td>{item.id}</td><td>{item.question}</td><td>{item.answer}</td><td><Button id={item.id} onClick={this.faqUpdate}>Edit</Button></td><td><Button id={item.id} onClick={this.faqDelete}>Delete</Button></td>
               </tr>
             })}
           </table>

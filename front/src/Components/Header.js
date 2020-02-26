@@ -8,9 +8,9 @@ export default class Header extends Component {
     render() {
         return (
             <Spring
-                from={{ opacity: 0, marginLeft: -2000 }}
-                to={{ opacity: 1, marginLeft: 0 }}
-                config={{ delay: 500, duration: 1500 }}
+                from={{ opacity: 0, marginRight: -2000 }}
+                to={{ opacity: 1, marginRight: 0 }}
+                config={{ delay: 700, duration: 1500 }}
             >
                 {
                     props =>

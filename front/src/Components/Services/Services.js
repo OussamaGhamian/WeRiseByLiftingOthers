@@ -27,7 +27,7 @@ class Services extends Component {
   render() {
     return (
       <Spring
-        from={{ opacity: 0, marginTop: -2000 }}
+        from={{ opacity: 0, marginTop: -1000 }}
         to={{ opacity: 1, marginTop: 0 }}
         config={{ duration: 1500 }}
       >
