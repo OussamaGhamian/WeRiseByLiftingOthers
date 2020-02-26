@@ -1,83 +1,142 @@
-import React, { Component } from 'react';
-import './ContactUs.css'
-import { Spring } from 'react-spring/renderprops'
+import React, { Component } from "react";
+import "./ContactUs.css";
+import { Spring } from "react-spring/renderprops";
 export default class contactus extends Component {
-    render() {
-        return (
-            <Spring
-                from={{ opacity: 0, marginTop: -600 }}
-                to={{ opacity: 1, marginTop: 0 }}
-                config={{ duration: 1000 }}
-            >
-                {
-                    props =>
-                        <div style={props}>
-                            <div className="ContactUs" >
+  constructor(props) {
+    super(props);
+    this.state = {
+      contacts: [],
+      error: ""
+    };
+  }
 
-                                <div className="Container1">
-                                    <div className="name">
-                                        <h2>Contact Us</h2>
-                                    </div>
-                                    <div className="three">
-                                        <div className="fak"><i className="material-icons">add_location</i>
-                                            <p className="mb-4">
-                                                <span className="add_location"></span>
-                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae omnis, beatae qui quis ut ipsam,
-                                        ratione animi exercitationem perspiciatis hic iusto harum maiores iure labore atque sapiente laboriosam ad
-            libero. </span>
-                                            </p>
-                                        </div>
+  createContact = async e => {
+    const form = e.target;
+    const fname = form.firstname.value;
+    const lname = form.lastname.value;
+    const msg = form.msg.value;
+    try {
+      if (!fname || !lname || !msg) {
+        throw new Error(`you need all properties to create a contact`);
+      }
+      const response = await fetch(
+        `http://localhost:8080/ContactUs/create?fname=${fname}&lname=${lname}&messae=${msg}`
+      );
 
-                                        <div className="num"><i className="material-icons">call</i>
-                                            <p className="mb-4">
-                                                <span className="call"></span>
-                                                <a href="#">+phone: +1 232 3235 324</a>
-                                            </p>
-                                        </div>
-                                        <div className="email"><i className="material-icons">contact_mail</i>
-                                            <p className="mb-0">
-                                                <span className="contact_mail"></span>
-                                                <a href="mailto:youremail@domain.com">youremail@domain.com</a>
-                                            </p>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="form">
-                                        <form className="ff" />
-                                        <h4>Contact Form</h4>
-                                        <div className="fn">
-
-
-                                            <label for="fname">First Name</label>
-                                            <input type="text" id="fname" name="firstname" placeholder="Your name.." />
-
-                                            <label for="lname">Last Name</label>
-                                            <input type="text" id="lname" name="lastname" placeholder="Your last name.." />
-
-
-                                            <label for="subject"> Subject </label>
-                                            <input type="text" id="subject" name="subject" placeholder="your subject.." />
-
-                                            <label for="email">Email</label>
-                                            <input type="text" id="email" name="email" placeholder="your email.." />
-
-                                            <label for="msg">Message</label>
-                                            <textarea id="msg" name="msg" placeholder="Write something.." style={{ height: '200px' }}></textarea>
-
-                                            <input type="submit" value="send message" />
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                }
-            </Spring>
-
-        );
+      const result = await response.json();
+      console.log(result);
+      if (result.success) {
+        const contact = { fname, lname, msg };
+        const contacts = [...this.state.contacts, contact];
+        this.setState({ contacts, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err.message });
     }
+  };
+
+  render() {
+    return (
+      <Spring
+        from={{ opacity: 0, marginTop: -600 }}
+        to={{ opacity: 1, marginTop: 0 }}
+        config={{ duration: 1000 }}
+      >
+        {props => (
+          <div style={props}>
+            <div className="ContactUs">
+              <div className="Container1">
+                <div className="name">
+                  <h2>Contact Us</h2>
+                </div>
+                <div className="three">
+                  <div className="fak">
+                    <i className="material-icons">add_location</i>
+                    <p className="mb-4">
+                      <span className="add_location"></span>
+                      <span>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Repudiandae omnis, beatae qui quis ut ipsam,
+                        ratione animi exercitationem perspiciatis hic iusto
+                        harum maiores iure labore atque sapiente laboriosam ad
+                        libero.{" "}
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="num">
+                    <i className="material-icons">call</i>
+                    <p className="mb-4">
+                      <span className="call"></span>
+                      <a href="#">+phone: +1 232 3235 324</a>
+                    </p>
+                  </div>
+                  <div className="email">
+                    <i className="material-icons">contact_mail</i>
+                    <p className="mb-0">
+                      <span className="contact_mail"></span>
+                      <a href="mailto:youremail@domain.com">
+                        youremail@domain.com
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="form">
+                  <form className="ff" onSubmit={this.createContact}>
+                    <h4>Contact Form</h4>
+                    <div className="fn">
+                      <label for="fname">First Name</label>
+                      <input
+                        type="text"
+                        id="fname"
+                        name="firstname"
+                        placeholder="Your name.."
+                      />
+
+                      <label for="lname">Last Name</label>
+                      <input
+                        type="text"
+                        id="lname"
+                        name="lastname"
+                        placeholder="Your last name.."
+                      />
+
+                      <label for="subject"> Subject </label>
+                      <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        placeholder="your subject.."
+                      />
+
+                      <label for="email">Email</label>
+                      <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        placeholder="your email.."
+                      />
+
+                      <label for="msg">Message</label>
+                      <textarea
+                        id="msg"
+                        name="msg"
+                        placeholder="Write something.."
+                        style={{ height: "200px" }}
+                      ></textarea>
+
+                      <input type="submit" value="send message" />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </Spring>
+    );
+  }
 }
