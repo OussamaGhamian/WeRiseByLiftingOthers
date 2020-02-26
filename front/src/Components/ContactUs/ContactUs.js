@@ -11,16 +11,27 @@ export default class contactus extends Component {
   }
 
   createContact = async e => {
+    e.preventDefault()
     const form = e.target;
     const fname = form.firstname.value;
     const lname = form.lastname.value;
     const msg = form.msg.value;
+    console.log(fname, lname, msg)
     try {
       if (!fname || !lname || !msg) {
         throw new Error(`you need all properties to create a contact`);
       }
       const response = await fetch(
-        `http://localhost:8080/ContactUs/create?fname=${fname}&lname=${lname}&messae=${msg}`
+        `http://localhost:8080/ContactUs`, {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }, body: JSON.stringify({
+          fname, lname, message: msg
+        })
+
+      }
       );
 
       const result = await response.json();
