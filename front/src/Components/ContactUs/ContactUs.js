@@ -11,7 +11,7 @@ export default class contactus extends Component {
   }
 
   createContact = async e => {
-    e.preventDefault()
+    // e.preventDefault()
     const form = e.target;
     const fname = form.firstname.value;
     const lname = form.lastname.value;

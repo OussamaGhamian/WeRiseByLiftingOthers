@@ -9,6 +9,9 @@ export default class HomeAdmin extends Component {
       errPromise: "",
       experiences: [],
       errExp: "",
+      hero: [],
+      errHero: '',
+
     }
   }
   //promise
@@ -163,9 +166,22 @@ export default class HomeAdmin extends Component {
     }
   }
   //Experience
+  //hero
+  getHero = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/home/hero')
+      const result = await response.json()
+      result.success ? this.setState({ hero: result.result }) : this.setState({ errHero: "Error in fetching Hero section" })
+    }
+    catch (err) {
+      this.setState({ errHero: err })
+    }
+  }
+  //hero
   componentDidMount() {
     this.getPromises()
     this.getExperiences()
+    this.getHero()
   }
 
 
@@ -195,7 +211,6 @@ export default class HomeAdmin extends Component {
           </table>
           <Button><a href="Admin">Back</a></Button>
         </fieldset>
-        <hr/>
         {/*Experiences*/}
         <fieldset>
           <legend>Experiences</legend>
@@ -220,6 +235,31 @@ export default class HomeAdmin extends Component {
           </table>
           <Button><a href="Admin">Back</a></Button>
         </fieldset>
+        {/**Hero */}
+        <fieldset>
+          <legend>Promises</legend>
+          <Form onSubmit={this.addPromise}>
+            <Form.Row>
+              <Col>
+                <Form.Control name="title" placeholder="Title" />
+              </Col>
+              <Col>
+                <Form.Control name="description" placeholder="Description" />
+              </Col>
+            </Form.Row>
+            <button>Add</button>
+          </Form>
+          {/* <table>
+            <tr><th>#</th><th>Title</th><th>Description</th> <th></th><th></th></tr>
+            {this.state.promises.map((item, index) => {
+              return <tr>
+                <td>{item.id}</td><td>{item.title}</td><td>{item.description}</td><td><Button id={item.id} onClick={this.promiseUpdate} >Edit</Button></td><td><Button id={item.id} onClick={this.promiseDelete} >Delete</Button></td>
+              </tr>
+            })}
+          </table> */}
+          <Button><a href="Admin">Back</a></Button>
+        </fieldset>
+
       </div>
     )
   }
