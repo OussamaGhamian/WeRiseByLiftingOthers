@@ -1,6 +1,5 @@
 import React from 'react'
 import * as ReactBootstrap from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import './Admin.css'
 export default function Admin() {
   return (
