@@ -13,7 +13,6 @@
 
 .admin table {
   border-collapse: collapse;
-  width: 70%;
   min-width: 800px;
   margin-top: 50px;
 }
@@ -66,4 +65,9 @@
   text-align: center;
   font-size: xx-large;
   font-weight: 700  ;
+}
+.admin fieldset{
+  border-bottom : #007bff solid;
+  padding-bottom: 100px;
+  margin-bottom: 30px;
 }

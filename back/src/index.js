@@ -291,7 +291,7 @@ const start = async () => {
   app.delete("/HowItWorks/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
-      const result = await controller.deletegetHowItWorks(id);
+      const result = await controller.deleteHowItWorks(id);
       res.json({ success: true, result });
     } catch (err) {
       next(err);

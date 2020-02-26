@@ -54,11 +54,6 @@ export default class admin extends Component {
     const question = prompt("New value of question:")
     const answer = prompt("New value of answer:")
     const id = e.target.id
-
-    const body = new FormData();
-    body.append('question', question);
-    body.append('answer', answer);
-
     try {
       const response = await fetch(`http://localhost:8080/faq/${id}`, {
         method: 'put',
@@ -69,7 +64,7 @@ export default class admin extends Component {
         body: JSON.stringify({ question, answer })
       })
       const result = await response.json();
-      if(result.success)window.location.reload()
+      if (result.success) window.location.reload()
     }
     catch (err) { this.setState({ err }) }
 
@@ -91,10 +86,10 @@ export default class admin extends Component {
             question, answer
           })
         })
-        const result = await response.json()
-        if(result.success){
-          window.location.reload()
-        }
+      const result = await response.json()
+      if (result.success) {
+        window.location.reload()
+      }
     }
 
     catch (err) { this.setState({ err }) }

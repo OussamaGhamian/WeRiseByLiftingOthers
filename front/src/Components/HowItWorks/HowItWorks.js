@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './HowItWorks.css'
 import Section from "../Section"
+
 import { Spring } from 'react-spring/renderprops'
 export default class HowItWorks extends Component {
     constructor(props) {

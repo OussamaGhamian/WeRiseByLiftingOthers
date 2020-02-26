@@ -16,6 +16,7 @@ import ServiceAdmin from "./pages/Admin/ServiceAdmin";
 import HITAdmin from "./pages/Admin/HITAdmin";
 import OurTeamAdmin from "./pages/Admin/OurTeamAdmin";
 import ContactAdmin from './pages/Admin/ContactAdmin'
+import DataImage from './Components/DataPortfolio/DataPortfolio'
 import Admin from './pages/Admin/Admin'
 export default class App extends Component {
   render() {
@@ -26,7 +27,7 @@ export default class App extends Component {
           <Header />
           <Switch>
             <Route path='/Portfolio' exact component={Portfolio} />
-            <Route path='/Portfolio/:id' render={props => <Portfolio {...props} />} /> {/*  this.props.match.params.id  */}
+            <Route path='/Portfolio/:id' component={DataImage} /> {/*  this.props.match.params.id  */}
             <Route path='/HIT' component={HowItWork} />
             <Route path='/ContactUs' component={ContactUs} />
             <Route path='/Services' component={Services} />
@@ -40,6 +41,7 @@ export default class App extends Component {
             <Route path='/HITAdmin' component = {HITAdmin} />
             <Route path='/OurTeamAdmin' component = {OurTeamAdmin} />
             <Route path='/ContactAdmin' component = {ContactAdmin} />
+            <Route path='/DataPortfolio' component={DataImage} />
             <Route path='/' component={Home} />
           </Switch>
           <Footer />
