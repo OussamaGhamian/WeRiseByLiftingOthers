@@ -123,7 +123,7 @@ export default class HomeAdmin extends Component {
     }
     catch (err) { this.setState({ err }) }
   }
-  promiseUpdate = async (e) => {
+  updateExperience = async (e) => {
     const yearsNbr = prompt("New value of yearsNbr:")
     const field = prompt("New value of field:")
     const id = e.target.id
@@ -140,7 +140,27 @@ export default class HomeAdmin extends Component {
       if (result.success) window.location.reload()
     }
     catch (err) { this.setState({ err }) }
+  }
+  deleteExperience = async (e) => {
+    const id = e.target.id
+    try {
+      const response = await fetch(`http://localhost:8080/experience/${id}`, {
+        method: 'delete'
+      })
 
+      const result = await response.json();
+      if (result.success) {
+        const experiences = this.state.experiences.filter(
+          item => item.id != id
+        );
+        this.setState({ experiences, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    }
+    catch (err) {
+      this.setState({ err })
+    }
   }
   //Experience
   componentDidMount() {
@@ -154,7 +174,7 @@ export default class HomeAdmin extends Component {
       <div className="admin">
         <fieldset>
           <legend>Promises</legend>
-          <Form onSubmit={this.addExperience}>
+          <Form onSubmit={this.addPromise}>
             <Form.Row>
               <Col>
                 <Form.Control name="title" placeholder="Title" />
@@ -194,7 +214,7 @@ export default class HomeAdmin extends Component {
             <tr><th>#</th><th>Title</th><th>Description</th> <th></th><th></th></tr>
             {this.state.experiences.map((item, index) => {
               return <tr>
-                <td>{item.id}</td><td>{item.yearsNbr}</td><td>{item.field}</td><td><Button id={item.id} onClick={this.promiseUpdate} >Edit</Button></td><td><Button id={item.id} onClick={this.promiseDelete} >Delete</Button></td>
+                <td>{item.id}</td><td>{item.yearsNbr}</td><td>{item.field}</td><td><Button id={item.id} onClick={this.updateExperience} >Edit</Button></td><td><Button id={item.id} onClick={this.deleteExperience} >Delete</Button></td>
               </tr>
             })}
           </table>
