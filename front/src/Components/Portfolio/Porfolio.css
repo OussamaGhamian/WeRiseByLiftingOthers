@@ -6,6 +6,7 @@
   justify-content: space-evenly ;
   text-align: center;
 }
+
 h1{
  text-decoration: none;
 }
@@ -17,6 +18,7 @@ a {
 }
 .portI {
   border: gray 2px solid;
+  max-width: 400px;
 }
 
 @media only screen and (max-width: 900px) {
