@@ -68,11 +68,10 @@ export default class contactus extends Component {
                     <p className="mb-4">
                       <span className="add_location"></span>
                       <span>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Repudiandae omnis, beatae qui quis ut ipsam,
-                        ratione animi exercitationem perspiciatis hic iusto
-                        harum maiores iure labore atque sapiente laboriosam ad
-                        libero.{" "}
+                      Postal Address:
+                      PIGIER Bulding
+                      Gemmayzeh Street‬
+                      Lebanon Beirut.{" "}
                       </span>
                     </p>
                   </div>
@@ -81,7 +80,7 @@ export default class contactus extends Component {
                     <i className="material-icons">call</i>
                     <p className="mb-4">
                       <span className="call"></span>
-                      <a href="#">+phone: +1 232 3235 324</a>
+                      <a href="#">+phone: +961 87654389</a>
                     </p>
                   </div>
                   <div className="email">
@@ -89,7 +88,7 @@ export default class contactus extends Component {
                     <p className="mb-0">
                       <span className="contact_mail"></span>
                       <a href="mailto:youremail@domain.com">
-                        youremail@domain.com
+                        We_RBL_Others@gmail.com
                       </a>
                     </p>
                   </div>
