@@ -277,6 +277,7 @@ const initializeDatabase = async () => {
     }
   };
   const updateHero = async (name, image, slogan, btn) => {
+    console.log(name, slogan, btn, image)
     try {
       const result = await db.run(
         `update hero set name = '${name}' , image = '${image}' , slogan = '${slogan}' , btn = '${btn}' where id = 3`

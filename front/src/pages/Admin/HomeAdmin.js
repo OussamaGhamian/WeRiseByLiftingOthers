@@ -177,6 +177,32 @@ export default class HomeAdmin extends Component {
       this.setState({ errHero: err })
     }
   }
+
+  addHero = async (ev) => {
+
+    ev.preventDefault()
+    const name = ev.target.name.value
+    const slogan = ev.target.slogan.value
+    const btn = ev.target.btn.value
+    const image = ev.target.myfile.files[0]
+    const body = new FormData();
+   body.append("name",name)
+   body.append("slogan",slogan)
+   body.append("btn",btn)
+   body.append("image",image)
+    try {
+      const response = await fetch(`http://localhost:8080/home/hero`, {
+        method: 'put'
+       ,
+        body
+      })
+      const result = await response.json();
+      if (result.success) window.location.reload()
+    }
+    catch (err) {
+      this.setState({ errHero: err })
+    }
+  }
   //hero
   componentDidMount() {
     this.getPromises()
@@ -237,26 +263,28 @@ export default class HomeAdmin extends Component {
         </fieldset>
         {/**Hero */}
         <fieldset>
-          <legend>Promises</legend>
-          <Form onSubmit={this.addPromise}>
+          <legend>hero</legend>
+          <Form onSubmit={this.addHero}>
             <Form.Row>
               <Col>
-                <Form.Control name="title" placeholder="Title" />
+                <Form.Control name="name" placeholder="Name" />
               </Col>
               <Col>
-                <Form.Control name="description" placeholder="Description" />
+                <Form.Control name="slogan" placeholder="Slogan" />
               </Col>
+              <Col><Form.Control name="btn" placeholder="Button text" /></Col>
+              <Col><input type="file" id="myfile" name="myfile" /><br /><br /></Col>
             </Form.Row>
             <button>Add</button>
           </Form>
-          {/* <table>
-            <tr><th>#</th><th>Title</th><th>Description</th> <th></th><th></th></tr>
-            {this.state.promises.map((item, index) => {
+          <table>
+            <tr><th>#</th><th>WebsitName</th><th>Slogan</th> <th>Buttun text</th><th>Hero image</th><th></th><th></th></tr>
+            {this.state.hero.map((item, index) => {
               return <tr>
-                <td>{item.id}</td><td>{item.title}</td><td>{item.description}</td><td><Button id={item.id} onClick={this.promiseUpdate} >Edit</Button></td><td><Button id={item.id} onClick={this.promiseDelete} >Delete</Button></td>
+                <td>{item.id}</td><td>{item.name}</td><td>{item.slogan}</td><td>{item.btn}</td><td><input type="file" id="myfile" name="myfile" /></td><td><Button id={item.id} onClick={this.promiseUpdate} >Edit</Button></td><td><Button id={item.id} onClick={this.promiseDelete} >Delete</Button></td>
               </tr>
             })}
-          </table> */}
+          </table>
           <Button><a href="Admin">Back</a></Button>
         </fieldset>
 

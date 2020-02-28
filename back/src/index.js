@@ -181,6 +181,7 @@ const start = async () => {
   app.put(`/home/hero`, upload, async (req, res, next) => {
     const { name, slogan, btn } = req.body
     const image = req.file.path
+    console.log(name , slogan , btn , image)
     try {
       const result = await controller.updateHero(name, image, slogan, btn)
       res.json({ success: true, result })
