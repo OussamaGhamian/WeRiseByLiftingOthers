@@ -109,8 +109,7 @@ export default class Home extends Component {
                                 <section class="services_section">
                                     <h1>Our Core Services</h1>
                                     <article>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, placeat quasi quia
-                                        explicabo aut voluptatum accusamus adipisci perferendis
+                                    Every line of code and every pixel we deliver is carefully crafted by our in-house team. While constantly looking for new horizons, challenges and opportunities in the programming field, we have focused our attention on these core areas:
                     </article>
 
                                     <section class="services">
